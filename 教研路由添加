@@ -1,0 +1,73 @@
+{
+  "component": "knowleadagePoint/knowledagePointDetail",
+  "description": "知识点管理-知识点管理",
+  "hidden": 1,
+  "icon": "table",
+  "menuUrls": [
+    {
+      "requestMethod": "http://192.168.0.202:8076/base/getkptreelist/71990056-5280-4e19-af50-f03c98967ff5",
+      "url": "GET"
+    }
+  ],
+  "name": "knowledagePointDetail",
+  "orderNo": 0,
+  "parentId": "string",
+  "path": "knowledagePointDetail",
+  "permissionId": "string",
+  "permissionType": 1,
+  "title": "知识点管理",
+  "url": "string"
+}
+
+parentId--sjflsfow1111111111111111111111
+orderNo-3
+
+
+{
+        path: '/knowleadagePoint',
+        component: Layout,
+        redirect: 'noredirect',
+        name: 'knowleadagePoint',
+        meta: {
+            title: '知识点管理',
+            icon: 'form'
+        },
+        children: [{
+            path: 'knowleadagePoint_List',
+            hidden: false,
+            component: _import('knowleadagePoint/knowleadagePoint_List'),
+            name: 'knowleadagePoint_List',
+            meta: { title: '知识点管理', icon: 'table' }
+            },
+
+
+            {
+            path: '',
+            hidden: true,
+            component: _import(''),
+            name: '',
+            meta: { title: '', icon: '' }
+            },
+
+            {
+            path: 'newCreateKnowledagePoint',
+            hidden: true,
+            component: _import('knowleadagePoint/newCreateKnowledagePoint'),
+            name: 'newCreateKnowledagePoint',
+            meta: { title: '新建知识点', icon: 'table' }
+            },{
+            path: 'EditKnowledagePoint',
+            hidden: true,
+            component: _import('knowleadagePoint/EditKnowledagePoint'),
+            name: 'EditKnowledagePoint',
+            meta: { title: '修改知识点', icon: 'table' }
+            },{
+            path: 'newCreateKnowledagePoint_classic',
+            hidden: true,
+            component: _import('knowleadagePoint/newCreateKnowledagePoint_classic'),
+            name: 'newCreateKnowledagePoint_classic',
+            meta: { title: '新建经典例题', icon: 'table' }
+            },
+
+        ]
+    },
