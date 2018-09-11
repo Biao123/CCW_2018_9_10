@@ -1,0 +1,11 @@
+数组匹配
+this.ruleForm.answers.forEach((item,index)=>{
+     let reg  = new RegExp(`__${item.number}__`);
+     console.log(reg)
+     var a = this.ruleForm.question.questionContent.match(reg);
+     if(!reg.test(this.ruleForm.question.questionContent.match(reg))){
+            this.ruleForm.answers.splice(index, 1); 
+     }                                                                                                             
+  })
+  
+  
