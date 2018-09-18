@@ -13,15 +13,23 @@
  
      <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" lazy :load='loadNode' style='margin-top: 10px'></el-tree>
      //
+
+         动态加载lazy参数和load方法是必选的,
+         lazy:为节点store（TreeStore）中的属性，可输出当前节点进行查看
+         load：加载子数据的方法，用法为function(node,reslove){}
+
      data(){
        return{
          defaultProps: {
+           //配置父子树的属性名
            children: 'children',
            label: 'label'
          },
          data:[],
        }
      }
+
+
 
      loadNode(node, resolve){
        if (node.level === 0) {
