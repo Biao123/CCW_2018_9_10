@@ -1,11 +1,63 @@
 数组匹配
-this.ruleForm.answers.forEach((item,index)=>{
-     let reg  = new RegExp(`__${item.number}__`);
-     console.log(reg)
-     var a = this.ruleForm.question.questionContent.match(reg);
-     if(!reg.test(this.ruleForm.question.questionContent.match(reg))){
-            this.ruleForm.answers.splice(index, 1); 
-     }                                                                                                             
-  })
+     this.ruleForm.answers.forEach((item,index)=>{
+          let reg  = new RegExp(`__${item.number}__`);
+          console.log(reg)
+          var a = this.ruleForm.question.questionContent.match(reg);
+          if(!reg.test(this.ruleForm.question.questionContent.match(reg))){
+                 this.ruleForm.answers.splice(index, 1); 
+          }                                                                                                             
+       })
   
+  
+ element-ui的树形图
+ 
+     <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" lazy :load='loadNode' style='margin-top: 10px'></el-tree>
+     //
+     data(){
+       return{
+         defaultProps: {
+           children: 'children',
+           label: 'label'
+         },
+         data:[],
+       }
+     }
+
+     loadNode(node, resolve){
+       if (node.level === 0) {
+         //初始第一层节点，初始化数据，根节点配置
+         return resolve([{ label: this.chooseData.kpName,id: this.chooseData.id}]);
+         // 加入id，label可能会重名
+       }
+       var data = [];
+       if(node.data.id == this.chooseData.id){
+       //点击树节点1的处理
+         for(let i = 0 ;i < this.chooseData.oneKpTreeVOs.length;i++){
+           data.push({'label':'','id':''})
+           data[i].label = this.chooseData.oneKpTreeVOs[i].kpName
+           data[i].id = this.chooseData.oneKpTreeVOs[i].id
+         }
+       }
+       //点击树节点2的处理
+       for(let i = 0 ;i < this.chooseData.oneKpTreeVOs.length;i++){
+         for(let m = 0 ;m < this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs.length;m++){
+           if(node.data.id == this.chooseData.oneKpTreeVOs[i].id){
+               data.push({'label':'','id':''})
+               data[m].label = this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m].kpName
+               data[m].id = this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m].id
+               console.log(1)
+           }
+         }
+       }
+       resolve(data)//加载下级数据!
+     },
+     handleNodeClick(node, resolve){
+       this.key = ''
+       if(resolve.level == 1){
+         this.treeId = this.chooseData.id
+       }else{
+         this.treeId = node.id
+       }
+       this.getSearchList()
+     },
   
