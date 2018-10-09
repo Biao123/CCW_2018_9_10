@@ -69,3 +69,17 @@
        this.getSearchList()
      },
   
+//图片上传
+      showpic(){
+        //获取上传文件的信息
+        var pic =document.getElementById('pic');
+        console.log(pic);
+
+        //在pic的文件里抓取该文件用于显示二进制信息
+        var sr  = window.URL.createObjectURL(pic.files[0]);
+        console.log(sr);
+        //设置src属性，显示图片
+        document.getElementById('img').setAttribute('src',sr)
+      }, 
+      <img src="https://www.baidu.com/img/bd_logo1.png?where=super" alt="" style="width: 100%;cursor: pointer;display: block;" id='img'>
+      <input type="file" style="width: 100px;position: absolute;height: 34px;top: 0;opacity: 0;cursor: pointer;" id="pic" @click='showpic()'>
