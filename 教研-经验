@@ -88,3 +88,44 @@
       }, 
       <img src="https://www.baidu.com/img/bd_logo1.png?where=super" alt="" style="width: 100%;cursor: pointer;display: block;" id='img'>
       <input type="file" style="width: 100px;position: absolute;height: 34px;top: 0;opacity: 0;cursor: pointer;" id="pic" @click='showpic()'>
+
+//光标插入
+<el-input class='te' type="textarea" id="textarea"  v-model="ruleForm.question.questionContent" @input="onEditorChange($event)"></el-input>
+          insertGap(){
+              let textObj = document.getElementById('textarea')
+              let textFeildValue = `__${this.count++}__`;
+                  if (document.all) {
+                      if (textObj.createTextRange && textObj.caretPos) {
+                          var caretPos = textObj.caretPos;
+                          caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == '   ' ? textFeildValue + '   ' : textFeildValue;
+                      } else {
+                          textObj.value = textFeildValue;
+                      }
+                  } else {
+                      if (textObj.setSelectionRange) {
+                          var rangeStart = textObj.selectionStart;
+                          var rangeEnd = textObj.selectionEnd;
+                          var tempStr1 = textObj.value.substring(0, rangeStart);
+                          var tempStr2 = textObj.value.substring(rangeEnd);
+                          textObj.value = tempStr1 + textFeildValue + tempStr2;
+                      } else {
+                          alert("This   version   of   Mozilla   based   browser   does   not   support   setSelectionRange");
+                      }
+                  }
+                this.ruleForm.question.questionContent = textObj.value
+                // this.ruleForm.question.questionContent+=`__${this.count++}__`;
+                // this.ruleForm.question.questionContent = this.ruleForm.question.questionContent.replace('<p>','');
+                this.ruleForm.answers.push({id:'',answerContent:'',imgId:'',isRight:0,seqNo:'',isShow:false,number:this.number++})
+            },
+
+            onEditorChange(val) {
+              console.log(val)
+              this.ruleForm.answers.forEach((item,index)=>{
+                 var reg  = new RegExp(`__${item.number}__`);
+                 var a = this.ruleForm.question.questionContent.match(reg);
+                 if(!reg.test(this.ruleForm.question.questionContent.match(reg))){
+                        this.ruleForm.answers.splice(index, 1); 
+                 }                                                                                                             
+              })
+             })
+
