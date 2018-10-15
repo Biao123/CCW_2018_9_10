@@ -180,3 +180,26 @@
                     }
                 }
             },
+
+//字符串正则匹配排序
+insertGap(){
+                this.pasteHtmlAtCaret('__'+(this.ruleForm.answers.length+1)+'__',false)
+                this.ruleForm.answers.push({id:'',answerContent:'',imgId:'',isRight:1,seqNo:'',isShow:false,number:this.ruleForm.answers.length+1})
+                setTimeout(() => {
+                  var reg  = /__\d__/g;
+                  var a = this.ruleForm.question.questionContent.match(reg)
+                  let splitArr = []
+                  let afterStr = ''
+                  splitArr = this.ruleForm.question.questionContent.split(reg)
+                  if(splitArr){
+                    for(var i = 0 ; i < splitArr.length-1;i++){
+                      afterStr = afterStr + splitArr[i] + '__'+(i+1)+'__'
+                    }
+                    this.ruleForm.question.questionContent = afterStr + '</p>'
+                    console.log(this.ruleForm.question.questionContent)
+                  }
+                  for(let i = 0 ; i <  a.length ; i++){
+                    this.ruleForm.answers[i].number = i+1
+                  }
+                },200)
+            },
