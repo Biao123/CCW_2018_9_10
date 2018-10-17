@@ -1,0 +1,22 @@
+1   字符串转json
+    var jsonstr = '{"name":"fendouer", "age":23}'
+        eval('(' + jsonstr + ')'); //可以将json字符串转换成json对象,注意需要在json字符外包裹一对小括号 
+        JSON.parse(jsonstr); //可以将json字符串转换成json对象 
+        JSON.stringify(jsonobj); //可以将json对象转换成json对符串
+        $.parseJSON( jsonstr ); //jQuery.parseJSON(jsonstr),可以将json字符串转换成json对象
+        
+2   父组件调用子组件方法
+    <drawEBook ref="children"></drawEBook>
+    this.$refs.children.childrenMethod()
+    
+    子组件调用父组件方法
+    <button @click="submit">提交</button>
+    submit(){
+        this.$emit('fatherMethod',参数')
+    }
+    <editor id="editor" class="editor" @fatherMethod="fatherMethod"></editor>
+    fatherMethod(){}
+
+3
+
+4
