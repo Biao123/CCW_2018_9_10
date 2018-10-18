@@ -17,6 +17,24 @@
     <editor id="editor" class="editor" @fatherMethod="fatherMethod"></editor>
     fatherMethod(){}
 
-3
-
+3   照片上传七牛云
+    1：文件的base64格式
+    var pic = this.imgBase64
+    2：url七牛云带上putb4/和file的字节长度（要除掉data:image/jpeg;base64，使用this.imgBase64 = img_reader.result.split(',')[1]）
+    var url = "https://upload.qiniup.com/putb64/" + this.imgLength;
+    3：注意（获取七牛云的token加上key，"UpToken " + this.upToken.token需要加一个空格）
+        var xhr = new XMLHttpRequest();
+        var str
+        xhr.onreadystatechange=function(){
+          if (xhr.readyState==4){
+            console.log(JSON.parse(xhr.response))
+            this.imgUrl = QiNiu.QiNiuConfigUrl + JSON.parse(xhr.response).key
+            console.log(this.imgUrl)
+            sessionStorage.setItem('data',this.imgUrl)   //需要设置在本地缓存才能被全局去调用
+          }
+        }
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/octet-stream");
+        xhr.setRequestHeader("Authorization", "UpToken " + this.upToken.token);
+        xhr.send(pic);
 4
