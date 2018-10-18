@@ -37,4 +37,27 @@
         xhr.setRequestHeader("Content-Type", "application/octet-stream");
         xhr.setRequestHeader("Authorization", "UpToken " + this.upToken.token);
         xhr.send(pic);
-4
+4   vue 刷新当前页面问题
+    https://www.cnblogs.com/yinn/p/9056731.html
+    采用全局注册 isShow
+    provide(){
+        return{
+            this.reload
+        }
+    },
+    data(){
+        return{
+            isShow:true
+        }
+    }
+    reload(){
+        this.isShow = false
+        this.$nextTick(function(){
+            this.isShow = true
+        })
+    }
+    组件按需引用，注入inject:['reload']
+    this.reload()直接调用
+    
+
+5
