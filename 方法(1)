@@ -80,6 +80,14 @@
     actions:{
         login(){}
     }
+    通过$store.getters.not_show来改变某些值全局使用但是只是在某个节点需要使用
+    import { mapState.mapGetters.mapActions } from 'vuex'
+    computed:{
+        ...mapState:{
+            show:state=>state.dialog.show
+        }
+    }
+    
     
 6
 7
