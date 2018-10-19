@@ -60,7 +60,12 @@
     this.reload()直接调用
     
 
-5   关于vuex的使用，state储存值,mutations方法,aactios异步调用值
+5   关于vuex的使用
+    可以store下面创建一个index.js引入modules不同的按需调用js
+    state储存值,mutations方法,aactios异步调用值通过this.$store.commit
+    异步方法放在actioins里通过this.$store.dispatch调用
+    mutations里的操作必须是同步的
+    mutations 中的方法是不分组件的,调用某个方法会执行所有的方法
     this.$store.commit(''SET_ID',id)  调用mutations方法存储id值
     this.$store.dispatch('login').then(() =>{
     })
