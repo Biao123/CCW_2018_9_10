@@ -60,4 +60,22 @@
     this.reload()直接调用
     
 
-5
+5   关于vuex的使用，state储存值,mutations方法,aactios异步调用值
+    this.$store.commit(''SET_ID',id)  调用mutations方法存储id值
+    this.$store.dispatch('login').then(() =>{
+    })
+    state(){
+        id:'',
+    },
+    mutations(){
+        SET_ID: (state, id) => {
+          state.id = id
+        },
+    },
+    actions:{
+        login(){}
+    }
+    
+6
+7
+8
