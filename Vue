@@ -1,0 +1,16 @@
+1   全局过滤器filter
+    main.js中全局引入import * as filters from './filters' // global filters
+    filter.js中写入全局的filter
+    export function SetDate(value) { //时间转换 适用于本项目
+     if (value == null) {
+        return ''
+     } else {
+        return new Date(value).toLocaleString()
+     }
+    }
+    
+2
+3
+4
+5
+6
