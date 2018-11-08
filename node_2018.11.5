@@ -1,0 +1,111 @@
+node.js
+
+引入模块的时候加入路径,不然会依次在内置模块、全局模块和当前模块下查找
+let sayHello = require('./sayHello') 
+
+想要在下一次事件响应中执行代码，可以调用process.nextTick()
+process.nextTick(function(){
+	console.log('process...')
+})
+
+// 判断是否在node环境下执行
+if (typeof(window) === 'undefined') {
+    console.log('node.js');
+} else {
+    console.log('browser');
+}
+
+buffer是包含0个或多个任意字节的数组，但又不同于数组，可以转换为string
+var text = data.toString('utf-8');
+var buf = Buffer.from(text, 'utf-8');
+
+
+fs模块
+
+	异步读取数据
+	'use strict'
+	let fs = require('fs')
+	fs.readFile('1.text',function(err,data){
+		if(err){
+			console.log(err)
+		}else{
+			console.log(data)
+		}
+	})
+
+	同步读取
+	'use strict'
+	let fs = require('fs')
+	let data = fs.readFileSync('1.txt','utf-8')
+	console.log(data)
+
+	stat读取数据具体内容
+	'use strict'
+	let fs = require('fs')
+	fs.stat('1.txt',function(err,stat){
+		if(err){
+			console.log(err)
+		}else{
+			console.log('isFile:' + stat.isFile())
+			console.log('isDirectory: ' + stat.isDirectory());
+			if(stat.isFile()){
+				console.log('size:' + stat.size)
+				console.log('birth time: ' + stat.birthtime);
+				console.log('modified time: ' + stat.mtime);
+			}
+		}
+	})
+
+
+strem模块
+
+	stdin：标准输入流
+	stdout：标准输出流
+	data事件表示流的数据已经可以读取了
+	end事件表示这个流已经到末尾了，没有数据可以读取了
+	error事件表示出错了。
+
+	'use strict'
+	let fs = require('fs')
+	let rs = fs.createReadStream('./node/sample.txt')
+	let ws = fs.createWriteStream('./node/copied.txt')
+	rs.pipe(ws)
+
+
+http模块
+	 
+	
+crypto模块
+	
+events模块
+	events 模块只提供了一个对象： events.EventEmitter。EventEmitter 的核心就是事件触发与事件监听器功能的封装。
+	类似于addEvnetListener(event,listener)
+
+	const events = require('events')
+	const eventEmitter = new events.EventEmitter()
+	eventEmitter.on('hello',function(arg1,arg2){})
+	eventEmitter.once('hello',function(arg1,arg2){})
+	eventEmitter.emit('hello')
+	events.emitter.listenerCount(eventName) //推荐
+
+	EventEmitter 规定如果没有响 应的监听器，Node.js 会把它当作异常，退出程序并输出错误信息。
+    我们一般要为会触发 error 事件的对象设置监听器，避免遇到错误后整个程序崩溃
+
+
+buffer模块缓冲区
+	js自身只有sring数据类型，没有二进制类型，在处理tcp等文件流时就需要使用二进制数据，buffer类用于存放二进制数据缓存区
+	使用 Buffer.from() 接口去创建Buffer对象。
+	const buf = buffer.from('hello','ascii')
+	console.log(buf.toString('hex'))
+
+
+模块系统
+	Node.js 提供了 exports 和 require 两个对象，其中 exports 是模块公开的接口，require 用于从外部获取一个模块的接口，即所获取模块的 exports 对象。
+
+	nodejs模块分为四个，原生模块和三个文件模块
+
+
+
+
+
+	
