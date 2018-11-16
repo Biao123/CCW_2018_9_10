@@ -1,0 +1,35 @@
+正常文档流 normal flow
+
+	元素盒子基于文档的写作模式排列，垂直或者水平
+
+脱离文档流
+
+	float  清除浮动的hack模式，在内容中加一个css伪元素，clear为both .conatiner::after{clear:both;content:'';display:table}
+
+	块级格式化上下文  block formatting context
+		overflow:auto
+		display:flow-root
+		前者会出现一些滚动条或阴影截断，后一个创建一个bfc又能避免一些bug
+
+	position static,absolute,relative,fixed,sticky(新特性，类似fixed，但是只有当到了这个区域的时候才会固定 )
+		position:sticky:
+		top:0;
+
+	弹性布局flex-layout
+		display:flex;为一维布局设计的布局模式，将内容按行或者按列布局
+			默认flex-direction:row;cross-axis:column;
+			flex:1 1 200px;代表flex-grow,flex-shrink,flex-basic，最后一个为basci基准大小，第一个为大于的时候在容器大小不足或有空余时控制各个弹性项的大小。
+
+	网格布局grid-layout,fr为网格弹性单位
+	  	display: grid;
+  		grid-template-columns: 1fr 1fr 1fr;
+
+
+
+
+
+
+
+
+
+
