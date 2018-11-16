@@ -24,7 +24,13 @@
 	  	display: grid;
   		grid-template-columns: 1fr 1fr 1fr;
 
+  	盒模型的生成
 
+  	多栏布局
+  		column-width:200px;
+  		column-count:3;
+  		column-rule: 4px dotted #000;
+  		column-gap: 20px;
 
 
 
