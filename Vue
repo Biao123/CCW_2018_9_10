@@ -9,7 +9,8 @@
      }
     }
     
-2
+2   动态class结合<span :class="[{activeImg:item.isRight==1},'imgTab']"></span>
+        后面的class必须带引号
 3
 4
 5
