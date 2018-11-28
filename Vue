@@ -11,7 +11,9 @@
     
 2   动态class结合<span :class="[{activeImg:item.isRight==1},'imgTab']"></span>
         后面的class必须带引号
-3
+3   set方法赋值
+        对象 this.$set(this.multiResource,'audios',r.result.audio)
+        数组 Vue.set(this.gc,0,{name:'lisi',age:22})
 4
 5
 6
