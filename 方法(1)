@@ -7,7 +7,7 @@
         
 2   父组件调用子组件方法
     <drawEBook ref="children"></drawEBook>
-    this.$refs.children.childrenMethod()
+    this.$refs.children.childrenMethod(row)  //可直接传递数据
     
     子组件调用父组件方法
     <button @click="submit">提交</button>
