@@ -1,0 +1,5 @@
+数组length不只是可读的，可以用此从数组的末尾移除项或向数组中添加新项
+var colors = ["red", "blue", "green"]; // 创建一个包含 3 个字符串的数组
+colors.length = 2;
+alert(colors[2]); //undefined
+colors[colors.length] = "black”;  //(在位置3)添加一种颜色
