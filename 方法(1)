@@ -89,6 +89,9 @@
     }
     
     
-6
+6   apply(this,arguments)   call(this,arguments) 俩者都是调用一个对象的方法，继承另一个对象的属性，apply有一个特性，
+arguments会先把数组参数转化为对象参数 ，这样可以解决一个数组push的方法，Array.prototype.push.apply(arr1,arr2)
+
+
 7
 8
