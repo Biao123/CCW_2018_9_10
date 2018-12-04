@@ -14,6 +14,13 @@
 3   set方法赋值
         对象 this.$set(this.multiResource,'audios',r.result.audio)
         数组 Vue.set(this.gc,0,{name:'lisi',age:22})
-4
+        
+4   对象添加属性
+    treeToArray(level){
+        if(data._level === undefined){Vue.set(data,'_level',level)}
+    }
+    
+    
+    
 5
 6
