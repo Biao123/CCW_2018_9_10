@@ -1,0 +1,7 @@
+POST提交数据之---Content-Type的理解； https://www.cnblogs.com/tugenhua0707/p/8975121.html
+
+application/x-www-unrencoded  主要用于键值对的json
+application/json  json的形式的优点是它可以传递结构复杂的数据形式，比如对象里面嵌套数组这样的形式等。
+  会发俩次请求，第一次发Method为OPTIONS的请求到服务器，询问服务起支持那些哪些请求方法，如果支持跨域，就发第二次请求，不支持则不发第二次且报错跨域
+  
+ 
