@@ -1,21 +1,41 @@
-数组length不只是可读的，可以用此从数组的末尾移除项或向数组中添加新项
-var colors = ["red", "blue", "green"]; // 创建一个包含 3 个字符串的数组
-colors.length = 2;
-alert(colors[2]); //undefined
-colors[colors.length] = "black”;  //(在位置3)添加一种颜色
+1   数组length不只是可读的，可以用此从数组的末尾移除项或向数组中添加新项
+    var colors = ["red", "blue", "green"]; // 创建一个包含 3 个字符串的数组
+    colors.length = 2;
+    alert(colors[2]); //undefined
+    colors[colors.length] = "black”;  //(在位置3)添加一种颜色
+    
+    join()可以改变数组的连接状态console.log(arrs.join("-")); // aa-bb-cc
+    concat()连接数组返回新数组
+    pop()删除最后并返回删除的值
+    push()添加在最后并返回length
+    reverse()倒置并返回
+    shift()头部删除并返回删除的值，空则返回undefined
+    unshift()头部添加
+    sort()按照字母的字符编码的顺序进行排序
+        console.log(arrs2.sort(function(a,b){
+            return a - b;  // ["5", "8", "12", "15"]
+        }));
+    splice(),删除，替换，添加
+    toString()将数组转换为字符串
+      console.log(arrs.toString()); // 1,2
+    slice(2,3)返回区间
 
 
-sort()方法会调用每个数组项的 toString()转型方法,然后比较得到的字符串,以 确定如何排序。即使数组中的每一项都是数值,sort()方法比较的也是字符串。
-var values = [0, 1, 5, 10, 15];
-values.sort();
-alert(values);     //0,1,10,15,5
+2   sort()方法会调用每个数组项的 toString()转型方法,然后比较得到的字符串,以 确定如何排序。即使数组中的每一项都是数值,sort()方法比较的也是字符串。
+    var values = [0, 1, 5, 10, 15];
+    values.sort();
+    alert(values);     //0,1,10,15,5
 
-Math.ceil() Math.round() Math.floor()
-
-
+    Math.ceil() Math.round() Math.floor()
 
 
-
+3   设计模式
+      工厂模式function createPerson(name,age,sex){}
+      单例模式：由于单体模式只实例化一次，因此第一次调用，返回的是a实例对象，当我们继续调用的时候，b的实例就是a的实例，因此下面都是打印的是aa；
+          var Singleton = function(name){
+              this.name = name;
+              this.instance = null;
+          };
 
 
 
