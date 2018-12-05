@@ -1,0 +1,2 @@
+1   Mutation Observer(变动观察器) https://www.cnblogs.com/tugenhua0707/articles/6849948.html
+      会在所有事件结束，dom更新后促发事件，是一个异步事件
