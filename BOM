@@ -1,0 +1,20 @@
+浏览器前进后退事件  http://www.cnblogs.com/Easty/p/7820055.html
+window.history.back()
+window.history.forward()
+window.go(num)
+4.window.history.pushState(state, title, utl)，在页面中创建一个 history 实体。直接添加到历史记录中。
+
+  参数：　　state：存储一个对象，可以添加相关信息，可以使用 history.state 读取其中的内容。
+
+       title：历史记录的标题。
+
+       url：创建的历史记录的链接。进行历史记录操作时会跳转到该链接。
+
+5.window.history.replaceState()，修改当前的 history 实体。
+
+6.popstate 事件，history 实体改变时触发的事件。
+window.addEventListener("popstate", function(){
+    //doSomething
+}, false)
+
+7.window.history.state，会获得 history 实体中的 state 对象。
