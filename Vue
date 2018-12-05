@@ -22,5 +22,8 @@
     
     
     
-5
+5   Vue.extend()全局构造器
+    Vue.set(object,key,value)
+    Vue.delete(objet,key)
+    Vue.directive({})
 6
