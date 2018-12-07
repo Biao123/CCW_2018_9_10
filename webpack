@@ -2,3 +2,10 @@ https://segmentfault.com/a/1190000006670084
 webpack-dev-server主要是启动了一个使用express的Http服务器
 
 babelrc npm install babel-preset-env --save-dev
+npm install --save-dev babel-preset-stage-2 stage-2
+
+babel
+  npm install --save-dev babel-core babel编译器的核心
+  npm install --save-dev babel-loader
+  npm install --save-dev babel-preset-env babel-plugin-transform-runtime babel-preset-stage-2
+  
