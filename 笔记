@@ -1,0 +1,15 @@
+1填空题插空符
+    onEditorChange({ editor, html, text }) {
+      // this.questionAnswerDTOs.answers.forEach((item,index)=>{
+
+      //    var reg  = new RegExp(`__${item.number}__`);
+      //    var a = this.questionAnswerDTOs.question.questionContent.match(reg);
+      //    if(!reg.test(this.questionAnswerDTOs.question.questionContent.match(reg))){
+      //           this.questionAnswerDTOs.answers.splice(index, 1);
+      //    }
+      // })
+      //   this.content=html;
+      //   var m = html.replace("&nbsp;"," ")
+      //   this.content = m
+      //   this.questionAnswerDTOs.question.questionContent = m
+    },
