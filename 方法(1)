@@ -93,5 +93,19 @@
 arguments会先把数组参数转化为对象参数 ，这样可以解决一个数组push的方法，Array.prototype.push.apply(arr1,arr2)
 
 
-7
-8
+7   VideoNo(){ // 复制音频编号
+              const Url2 = document.getElementById('copyVideo');
+              Url2.select(); // 选择对象
+              document.execCommand('Copy'); // 执行浏览器复制
+              this.$notify({
+                title: '成功',
+                message: '复制视频编号成功！！！',
+                type: 'success',
+              });
+            },
+            
+8   父传值子组件 :name='hello',props:{name:String,required:true}
+
+9
+10
+11
