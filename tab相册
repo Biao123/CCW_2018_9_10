@@ -1,0 +1,212 @@
+<template>
+  <div class='practice_container'>
+      <div class="unitList">
+          <p class="bookName">{{ bookData.bookName }}</p>
+          <ul>          
+            <li v-for='(item,index) in unitOptions' class="unit" :key="index" @click='setUnitId(index)'>
+                <div class="unitItem" @click='Modification(item)'> 
+                  <!-- <el-popover trigger="hover" placement="top" > -->
+                    <img :src="unitImg" width="200" height="250" alt="img" >
+                    <!-- <img :src="item.imgId" width="200" height="250" alt="img" > -->
+                    <!-- <div slot="reference" class="name-wrapper"> -->
+                        <!-- <img :src="item.imgId" width="210" height="295" alt="img" > -->
+                    <!-- </div> -->
+                  <!-- </el-popover> -->
+                    <div class="EBook_p">
+                      <p :title="item.bookName">Unit{{index+1}} &nbsp; {{item.unitName | toFilter}}</p>
+                    </div>
+                </div>   
+<!--                 <div class="EBook_edit">
+                  <span class="edit" v-waves @click='Modification(item)'><i class="el-icon-edit"></i>修改</span>
+                  <span class="delete" v-waves @click='Delete(item)'><i class="el-icon-delete"></i>删除</span>
+                </div> -->
+            </li> 
+          </ul>
+      </div>
+  </div>
+</template>
+
+<script>
+import Publicdata from '@/mock/Publicdata' // 公用数据
+import SWFObject from 'swfobject'
+import waves from '@/directive/waves' // 水波纹指令
+import { parseTime } from '@/utils'
+import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
+import Sortable from 'sortablejs'
+const calendarTypeOptions = [
+  { key: 'CN', display_name: 'China' },
+  { key: 'US', display_name: 'USA' },
+  { key: 'JP', display_name: 'Japan' },
+  { key: 'EU', display_name: 'Eurozone' }
+]
+
+// arr to obj ,such as { CN : "China", US : "USA" }
+const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
+  acc[cur.key] = cur.display_name
+  return acc
+}, {})
+export default {
+  directives: { 
+      waves
+    },
+   data() {
+      return {
+        bookData:{},
+        unitOptions:[],//单元数组
+        bookId:'',//单元id
+        unitImg:'',//封面图片
+
+      }
+    },
+    created() {
+      console.log(this.$route.params)
+      this.bookData = this.$route.params
+      this.bookId = this.bookData.id
+      // 获取图片
+      this.$api.get('/ebook/selectLikeEBook?key=' + this.bookData.bookName  + '&pageNum=1&pageSize=10', null , r => {
+        console.log(r)
+        this.unitImg = r.result.list[0].imgId
+      })  
+      // 获取教材单元
+      this.$api.get('/maintainWeek/' + this.bookId, null, r => {
+          this.unitOptions = r.result.unitListVOs;
+          this.unitId = this.unitOptions[0].unitId
+          console.log(this.unitOptions)
+          // 初始化资源
+          // this.getInit()
+          });
+    },
+    methods: {
+      Modification(){
+
+      },
+      // 初始化电子书
+      getInit(){
+        this.ruleForm.page = []
+        this.$api.get('/ebook/selectEBook?seqNo=1&bookId=' + this.selectData.id + '&unitId=' + this.unitId, null , r => {
+            this.total = r.result.total
+            this.activeIndex = 0
+            this.pageNum = 0
+
+            if(r.result.eBook == null){
+              return
+            }else{
+              for(let i = 0 ; i < r.result.total; i++){
+                this.bookNum++;
+                this.ruleForm.page.push({
+                  pageNum:this.bookNum,
+                  audioList:[],
+                  imgUrl:'',
+                  rectData:[],
+                  audioName:'',
+                  videoName:'',
+                })
+                // 规避canvas图片
+                this.ruleForm.page[i].imgUrl = r.result.eBook.link
+                // 编辑时需要的图片id
+                this.ebookId = r.result.eBook.id
+              }
+              if(r.result.eBookResourceVOS.length != 0  && r.result.eBookResourceVOS != null){
+                this.deleteResource.eBookResources = r.result.eBookResourceVOS //设置原始图片资源
+                this.deleteResource.eBook = r.result.eBook //设置原始图片资源
+                console.log(r.result)
+                console.log(this.ruleForm.page[0].rectData)
+                for(let i = 0 ;i < r.result.eBookResourceVOS.length;i++){ 
+                  this.ruleForm.page[0].rectData.push({
+                    audioId:r.result.eBookResourceVOS[i].audioUrl,
+                    audioName:r.result.eBookResourceVOS[i].audioName,
+                    translate:r.result.eBookResourceVOS[i].translate,
+                    flag:false,
+                    id:r.result.eBookResourceVOS[i].id,
+                    width:r.result.eBookResourceVOS[i].width,
+                    height:r.result.eBookResourceVOS[i].height,
+                    x:r.result.eBookResourceVOS[i].x,
+                    y:r.result.eBookResourceVOS[i].y,
+                    seqNo:r.result.eBookResourceVOS[i].seqNo,
+                    isShow:r.result.eBookResourceVOS[i].isShow
+                  })
+                }
+                this.resourceData = r.result.eBookResourceVOS
+                if(this.resourceData[0].isShow == 1){
+                  this.checked = false
+                }else{
+                  this.checked = true
+                }
+              }
+            }            
+          })
+        console.log(this.ruleForm.page)
+      },
+      // 切换教材单元
+      setUnitId(index){
+        // if(this.isChoose !== index){
+        //   this.bookNum = 0
+        //   this.count = 0
+        //   this.isChoose = index
+        //   this.resourceData = []
+        //   // 获取当前单元id
+        //   this.unitId = this.unitOptions[index].unitId
+        //   this.ruleForm2.eBook.unitId = this.unitOptions[index].unitId
+        //   // 初始化资源
+        //   this.getInit()
+        // }
+      },
+    },
+
+    filters: {
+      toFilter(val){
+        if(val.length > 10){
+          return val.slice(0,10) + '...'
+        }else{
+          return val
+        }
+      },
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  // 头部样式
+  .practice_container{
+    padding: 0 10px;
+    margin: 0;
+    overflow: hidden;
+  }
+  .unitList li{
+    list-style:none;
+    cursor: pointer;
+  }
+  .bookName{
+    cursor: pointer;
+    text-align: center;
+    font-size: 22px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51,51,51,1);
+  }
+  div.EBook_p{
+    background: black;
+    position: absolute;
+    opacity: 0.4;
+    width: 100%;
+    top: 200px;
+    color: #ffffff;
+  }
+  div.unitList ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;    
+  }
+  div.unitList ul li{
+    position: relative;
+    background:#eeeeee;
+    margin:0 30px 40px 0;
+  }
+  .unitItem{
+    width:200px;
+    height:250px;
+    cursor: pointer;
+    position: relative;
+    
+  }
+</style>
