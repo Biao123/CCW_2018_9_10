@@ -106,6 +106,31 @@ arguments会先把数组参数转化为对象参数 ，这样可以解决一个�
             
 8   父传值子组件 :name='hello',props:{name:String,required:true}
 
-9
+9   本地选取图片上传
+            <el-button style='position: relative;'>
+              选择图片
+              <input class="imgFile" type="file" id="file" accept="image/png, image/jpeg, image/gif, image/jpg" @change="preview(this)">
+            </el-button>   
+            .imgFile{
+              width: 100%;
+              position: absolute;
+              left: 0;
+              z-index: 1;
+              opacity: 0;
+              top: 0;
+              height: 100%;
+            }
+            // 选取图片
+            preview(obj){
+              let reads= new FileReader();
+              let img = document.getElementById('file').files[0]
+              let that = this
+              reads.readAsDataURL(img);
+              reads.onload=function (e) {
+                console.log(this.result)
+                that.pictureImg = this.result
+              };
+            },
+            //配第三条上传
 10
 11
