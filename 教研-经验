@@ -30,35 +30,52 @@
      }
 
 
-
+     //每次都会刷新一个node数据挂载
      loadNode(node, resolve){
-       if (node.level === 0) {
-         //初始第一层节点，初始化数据，根节点配置
-         return resolve([{ label: this.chooseData.kpName,id: this.chooseData.id}]);
-         // 加入id，label可能会重名
-       }
-       var data = [];
-       if(node.data.id == this.chooseData.id){
-       //点击树节点1的处理
-         for(let i = 0 ;i < this.chooseData.oneKpTreeVOs.length;i++){
-           data.push({'label':'','id':''})
-           data[i].label = this.chooseData.oneKpTreeVOs[i].kpName
-           data[i].id = this.chooseData.oneKpTreeVOs[i].id
-         }
-       }
-       //点击树节点2的处理
-       for(let i = 0 ;i < this.chooseData.oneKpTreeVOs.length;i++){
-         for(let m = 0 ;m < this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs.length;m++){
-           if(node.data.id == this.chooseData.oneKpTreeVOs[i].id){
-               data.push({'label':'','id':''})
-               data[m].label = this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m].kpName
-               data[m].id = this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m].id
-               console.log(1)
-           }
-         }
-       }
-       resolve(data)//加载下级数据!
-     },
+          this.expandKey = []
+          this.$api.get('/base/getkptreelist/'+this.chooseData.id ,null,r => {
+            this.chooseData = r.result
+            console.log(r)
+            this.expandKey.push(this.chooseData.id)
+          })
+          if (node.level === 0) {
+            //初始第一层节点，初始化数据，根节点配置
+            return resolve([{ label: this.chooseData.kpName,id: this.chooseData.id,kpLevel: this.chooseData.kpLevel}]);
+            // 加入id，label可能会重名
+          }
+          var data = [];
+          if(node.level === 1){
+            //判断null数据
+            if(this.chooseData.oneKpTreeVOs !== null){
+              for(let i = 0 ;i < this.chooseData.oneKpTreeVOs.length;i++){
+                data.push({'label':'','id':'','kpLevel':''})
+                data[i].label = this.chooseData.oneKpTreeVOs[i].kpName
+                data[i].id = this.chooseData.oneKpTreeVOs[i].id
+                data[i].kpLevel = this.chooseData.oneKpTreeVOs[i].kpLevel
+                this.expandKey.push(data[i].id)
+              }              
+            }
+          }
+          if(node.level === 2){
+            console.log(node)
+            for(let i = 0 ;i < this.chooseData.oneKpTreeVOs.length;i++){
+              if(this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs !== null){
+                console.log(data)
+                for(let m = 0 ;m < this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs.length;m++){
+                  if(node.data.id == this.chooseData.oneKpTreeVOs[i].id){
+                      console.log(this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m])
+                      data.push({'label':'','id':'','kpLevel':''})
+                      data[m].label = this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m].kpName
+                      data[m].id = this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m].id
+                      data[m].kpLevel = this.chooseData.oneKpTreeVOs[i].oneKpTreeVOs[m].kpLevel
+                      this.expandKey.push(data[m].id)
+                  }
+                }
+              }
+            }            
+          }
+          resolve(data)//加载下级数据!
+      },
      handleNodeClick(node, resolve){
        this.key = ''
        if(resolve.level == 1){
