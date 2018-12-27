@@ -126,10 +126,32 @@ arguments会先把数组参数转化为对象参数 ，这样可以解决一个�
               let img = document.getElementById('file').files[0]
               let that = this
               reads.readAsDataURL(img);
+              this.imgLength = img.size
               reads.onload=function (e) {
-                console.log(this.result)
-                that.pictureImg = this.result
+                that.imgBase64 = this.result.split(',')[1]
+                // 上传图片
+                that.uploadImage()
               };
+            },
+            uploadImage(){ 
+              let that = this;
+              let pic = this.imgBase64
+              let url = "https://upload.qiniup.com/putb64/" + this.imgLength;
+              let xhr = new XMLHttpRequest();
+              let str
+              xhr.onreadystatechange=function(){
+                if (xhr.readyState==4){
+                  if(xhr.status == 200){
+                    console.log(JSON.parse(xhr.response))
+                    that.pictureImg = QiNiu.QiNiuConfigUrl + JSON.parse(xhr.response).key;
+                    console.log(that.pictureImg)
+                  }
+                }
+              }
+              xhr.open("POST", url, true);
+              xhr.setRequestHeader("Content-Type", "application/octet-stream");
+              xhr.setRequestHeader("Authorization", "UpToken " + this.upToken.token);
+              xhr.send(pic);
             },
             //配第三条上传
 10
