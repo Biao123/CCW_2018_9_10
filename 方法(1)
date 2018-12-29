@@ -154,5 +154,11 @@ arguments会先把数组参数转化为对象参数 ，这样可以解决一个�
               xhr.send(pic);
             },
             //配第三条上传
-10
+            
+            
+10      动态高度
+        // 动态设置图片大小
+        setTimeout(() => {
+          document.getElementById('mainRight').style.height = document.getElementById('mainLeft').clientHeight + 'px'
+        },100) 
 11
