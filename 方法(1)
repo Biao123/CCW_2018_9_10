@@ -161,4 +161,8 @@ arguments会先把数组参数转化为对象参数 ，这样可以解决一个�
         setTimeout(() => {
           document.getElementById('mainRight').style.height = document.getElementById('mainLeft').clientHeight + 'px'
         },100) 
-11
+
+11      js判断对象的时候
+        JSON.stringify(r.result) == '{}'
+12
+13
