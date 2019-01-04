@@ -138,7 +138,17 @@ arguments会先把数组参数转化为对象参数 ，这样可以解决一个�
               let pic = this.imgBase64
               let url = "https://upload.qiniup.com/putb64/" + this.imgLength;
               let xhr = new XMLHttpRequest();
-              let str
+              //上传中设置上传的百分比
+              xhr.upload.addEventListener("progress", function(evt){
+                console.log(evt)
+                  if (evt.lengthComputable) {
+                      var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                      console.log(percentComplete)
+                      // document.getElementById("show"+fileId+"Me").innerHTML = '上传中'+percentComplete+"%";
+                  }else {
+                      // document.getElementById("show"+fileId+"Me").innerHTML = '无法计算';
+                  }
+              }, false);
               xhr.onreadystatechange=function(){
                 if (xhr.readyState==4){
                   if(xhr.status == 200){
@@ -153,7 +163,7 @@ arguments会先把数组参数转化为对象参数 ，这样可以解决一个�
               xhr.setRequestHeader("Authorization", "UpToken " + this.upToken.token);
               xhr.send(pic);
             },
-            //配第三条上传
+            //进度条  https://www.cnblogs.com/Jm-jing/articles/6980426.html
             
             
 10      动态高度
