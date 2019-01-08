@@ -1,0 +1,16 @@
+form中的*号必填是要在el-form-item上加上label，循环的:prop="'eBookResources.' + index + '.englishText'"
+          <el-form ref="ruleForm" :model="ruleForm" :rules="rules" class='pictureBook'>
+            <el-form-item
+              style='position: relative;'
+              :rules="{
+                required: true, message: '英文文本不能为空', trigger: 'blur'
+              }"
+              :label="' '"
+              :prop="'eBookResources.' + index + '.englishText'">
+              <el-input v-model="item.englishText" class="textarea" type="textarea" clearable placeholder="请输入英文文本" />
+            </el-form-item>
+           </el-form>
+           this.$refs[ruleForm].validate((valid) => {
+              if (valid){
+                }
+            })
