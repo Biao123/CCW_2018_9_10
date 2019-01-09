@@ -176,6 +176,7 @@ arguments会先把数组参数转化为对象参数 ，这样可以解决一个�
         JSON.stringify(r.result) == '{}'
         
 12      解决上传文件或图片时选择相同文件无法触发change事件的问题
+        <input type="file" name="file" class="file-input" @change="setFile" />
         setFile(e){
                ......
                e.srcElement.value = ""//及时清空
