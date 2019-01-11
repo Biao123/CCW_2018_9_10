@@ -1,1 +1,6 @@
+改变属性要使用setState()
+this.setState({comment: 'Hello'});
+this.setState((prevState, props) => ({
+  counter: prevState.counter + props.increment
+}));
 
