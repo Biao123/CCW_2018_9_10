@@ -47,4 +47,9 @@
 
 7   v-for中循环数据修改试图不改变，加上this.$forceUpdate();进行强制渲染
 
-8
+8   reload刷新
+    https://blog.csdn.net/qq_16772725/article/details/80467492
+    
+9
+
+10
