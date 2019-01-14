@@ -5,4 +5,137 @@ import 'xx.sass' from ''
 
 @extend  继承属性
 
+https://www.w3cplus.com/css/an-introduction-to-less-and-comparison-to-sass.html
+
+<link rel="stylesheet/less" type="text/css" href="styles.less">
+<script src="less.js" type="text/javascript"></script>
+
+1变量
+@blue: #00c;/*定义蓝色变量*/
+@light_blue: @blue + #333;/*定义浅蓝色变量*/
+@dark_blue: @blue - #333;/*定义深蓝变量*/
+.light_blue {
+  background-color: @light_blue;
+}
+.blue {
+  background-color: @blue;
+}
+.dark_blue {
+  background-color: @dark_blue;
+}
+
+
+2混合
+.border {
+  border-top: 1px dotted #333;
+}
+
+article.post {
+  background: #eee;
+  .border;
+}
+
+ul.menu {
+  background: #ccc;
+  .border;
+}
+
+2混合
+@mixin border {
+  border-top: 1px dotted #333;
+}
+
+article.post {
+  background: #eee;
+  @include border;
+}
+
+ul.menu {
+  background: #ccc;
+  @include border;
+}
+
+
+4带参数混合
+.border-radius( @radius: 3px ) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+
+5选择器继承
+.menu {
+  border: 1px solid #ddd;
+}
+.footer {
+  @extend .menu;
+}
+/* 上面的规则和下面的规则是一样的效果 */
+.menu, .footer {
+  border: 1px solid #ddd;
+}
+
+6嵌套规则
+#site-body { …
+  .post { …
+    .post-header { …
+      h2 { … }
+      a { …
+        &:visited { … }
+        &:hover { … }
+      }
+    }
+  }
+}
+
+
+7运算
+@base_margin: 10px;
+@double_margin: @base_margin * 2;
+
+@full_page: 960px;
+@half_page: @full_page / 2;
+@quarter_page: (@full_page / 2) / 2;
+
+8color函数
+@blue: #369;
+.submit {
+  padding: 5px 10px;
+  border: 1px solid @blue;
+  background: -moz-linear-gradient(top, lighten(@blue, 10%), @blue 100%); /*Moz*/
+  background: -webkit-gradient(linear, center top, center bottom, from(lighten(@blue, 10%)), color-stop(100%, @blue)); /*Webkit*/
+  background: -o-linear-gradient(top, lighten(@blue, 10%) 0%, @blue 100%); /*Opera*/
+  background: -ms-linear-gradient(top, lighten(@blue, 10%) 0%, @blue 100%); /*IE 10+*/
+  background: linear-gradient(top, lighten(@blue, 10%) 0%, @blue 100%); /*W3C*/
+  color: #fff;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+}
+
+
+9条件控制语句
+/* Sass中简单的if语句 */
+@if lightness($color) > 30% {
+  background-color: #000;
+} @else {
+  background-color: #fff;
+}
+
+/* Sass中简单的for循环语句*/
+@for $i from 1px to 10px {
+  .border-#{i} {
+    border: $i solid blue;
+  }
+}
+
+
+10命名空间
+#defaults {
+  .nav_list () {
+    list-style: none;
+    margin: 0; padding: 0;
+   }
+   .button () { … }
+   .quote () { … }
+}
 
