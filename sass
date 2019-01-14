@@ -138,4 +138,56 @@ ul.menu {
    .button () { … }
    .quote () { … }
 }
+调用
+nav ul {
+  #defaults > .nav_list;
+}
 
+
+11作用域
+@color: #00c; /* 蓝色 */
+
+#header {
+  @color: #c00; /* 红色 */
+   border: 1px solid @color; /* 红色边框 */
+}
+
+#footer {
+  border: 1px solid @color; /*蓝色边框 */
+}
+
+
+12注解
+/* comment */，是有效的，而且能够通过处理并正确输出
+// comment，同样可以用但是不能够通过处理也不能被输出，然后，结果是，“无声的”
+
+13导入
+@import ‘classes.less’
+@import ‘classes.css’
+
+14字符串插入
+@base_url = 'http://coding.smashingmagazine.com';
+background-image: url("@{base_url}/images/background.png");
+
+15转义
+.class {
+  filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=20)";
+}
+
+/* 实际上会输出下面的代码: */
+.class {
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=20);
+}
+
+
+16js表达式
+@string: `'howdy'.toUpperCase()`; /* @string becomes 'HOWDY' */
+
+/* You can also use the previously mentioned interpolation: */
+@string: 'howdy';
+@var: ~`'@{string}'.topUpperCase()`; /* becomes 'HOWDY' */
+
+/* Here we access part of the document */
+
+17输出格式
+LESS并没有输出设置，而Sass提供4中输出选项：nested, compact, compressed 和 expanded。
