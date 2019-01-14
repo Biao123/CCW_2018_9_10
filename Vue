@@ -50,6 +50,13 @@
 8   reload刷新
     https://blog.csdn.net/qq_16772725/article/details/80467492
     
-9
+9   树形图关于节点选中和回显问题
+    回显 设置:check-strictly="isStrictly"，渲染完后改为false
+    新建 let newArr = this.$refs.tree.getHalfCheckedNodes().concat(this.$refs.tree.getCheckedNodes())
+        newArr.forEach((val,index) => {
+            this.ruleForm.permissionIds.push(val.permissionId)
+          })
+         选中和半角的都加上
+
 
 10
