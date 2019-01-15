@@ -1,0 +1,129 @@
+fetch('some-url')
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      return Promise.reject({
+        status: response.status,
+        statusText: response.statusText
+      })
+    }
+  })
+  .catch(error => {
+    if (error.status === 404) {
+      // do something about 404
+    }
+  })
+  调用一个恰当方法将可读流转换为我们可以使用的数据
+  response.json()
+  response.blob()图片
+  response.text()xml
+fetch会返回promise，获取资源后适用.then
+
+let content = {some: 'content'};
+
+// The actual fetch request
+fetch('some-url', {
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(content)
+})
+// .then()...
+
+
+get
+// 通过fetch获取百度的错误提示页面
+fetch('https://www.baidu.com/search/error.html?a=1&b=2', { // 在URL中写上传递的参数
+    method: 'GET'
+  })
+  .then((res)=>{
+    return res.text()
+  })
+  .then((res)=>{
+    console.log(res)
+  })
+  
+  post
+// 通过fetch获取百度的错误提示页面
+fetch('https://www.baidu.com/search/error.html', {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded' // 指定提交方式为表单提交
+      'Accept': 'application/json' // 通过头指定，获取的数据类型是JSON
+    }),
+    body: new URLSearchParams([["foo", 1],["bar", 2]]).toString()
+  })
+  .then((res)=>{
+    return res.text()
+  })
+  .then((res)=>{
+    console.log(res)
+    
+ 封装
+ /**
+ * 将对象转成 a=1&b=2的形式
+ * @param obj 对象
+ */
+function obj2String(obj, arr = [], idx = 0) {
+  for (let item in obj) {
+    arr[idx++] = [item, obj[item]]
+  }
+  return new URLSearchParams(arr).toString()
+}
+
+/**
+ * 真正的请求
+ * @param url 请求地址
+ * @param options 请求参数
+ * @param method 请求方式
+ */
+function commonFetcdh(url, options, method = 'GET') {
+  const searchStr = obj2String(options)
+  let initObj = {}
+  if (method === 'GET') { // 如果是GET请求，拼接url
+    url += '?' + searchStr
+    initObj = {
+      method: method,
+      credentials: 'include'
+    }
+  } else {
+    initObj = {
+      method: method,
+      credentials: 'include',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }),
+      body: searchStr
+    }
+  }
+  fetch(url, initObj).then((res) => {
+    return res.json()
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * GET请求
+ * @param url 请求地址
+ * @param options 请求参数
+ */
+function GET(url, options) {
+  return commonFetcdh(url, options, 'GET')
+}
+
+/**
+ * POST请求
+ * @param url 请求地址
+ * @param options 请求参数
+ */
+function POST(url, options) {
+  return commonFetcdh(url, options, 'POST')
+}
+
+GET('https://www.baidu.com/search/error.html', {a:1,b:2})
+POST('https://www.baidu.com/search/error.html', {a:1,b:2})
+  })
