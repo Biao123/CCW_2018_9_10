@@ -1,0 +1,10 @@
+1.set去重
+https://mp.weixin.qq.com/s/JJaX30ANi8ntSaWna17Gow
+const arr = [1,1,2,3,4,4,5]
+const unique = [...new Set(arr)]
+//[1,2,3,4,5]
+Array.from 方法可以将 Set 结构转为数组。我们可以专门编写使用一个去重的函数
+function unique(array){
+  return Array.from(new Set(array))
+}
+unique([1,1,])
