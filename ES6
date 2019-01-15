@@ -1,4 +1,4 @@
-1.set去重
+1.set去重,合并，交集，差集
 https://mp.weixin.qq.com/s/JJaX30ANi8ntSaWna17Gow
 const arr = [1,1,2,3,4,4,5]
 const unique = [...new Set(arr)]
