@@ -127,3 +127,26 @@ function POST(url, options) {
 GET('https://www.baidu.com/search/error.html', {a:1,b:2})
 POST('https://www.baidu.com/search/error.html', {a:1,b:2})
   })
+  
+  请求文本
+      fetch('/xxx/page').then(res => {
+        return res.text();
+    }).then(res => {
+        console.log(res);
+    })
+  //发送 普通json
+    fetch('/xxx', {
+        method: 'post',
+        body: JSON.stringify({
+            username: '',
+            password: ''
+        })
+    });
+    发送form表单
+        var form = document.querySelector('form');
+    fetch('/xxx', {
+        method: 'post',
+        body: new FormData(form)
+    });
+
+
