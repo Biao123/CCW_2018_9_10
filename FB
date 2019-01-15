@@ -53,4 +53,59 @@ post更加安全，请求不放在url中显示，get还会保存在浏览器中�
 递归完后对文件根据entry分类生成代码块chunk
 输出所有chunk到文件系统
 
-11.
+11.es6和common.js
+es6模块输出的是对一个值的引用，编译时输出接口
+common.js模块是对一个值的拷贝，在运行时加载
+ES6输入的模块变量，只是一个符号链接，所以这个变量是只读的，对它进行重新赋值就会报错
+
+12.深拷贝和浅拷贝
+都是对于array和object这样的复杂类型
+也就是说a和b指向了同一块内存，所以修改其中任意的值，另一个值都会随之变化，这就是浅拷贝
+浅拷贝， ”Object.assign() 方法用于将所有可枚举的属性的值从一个或多个源对象复制到目标对象。它将返回目标对象
+深拷贝，JSON.parse()和JSON.stringify()给了我们一个基本的解决办法。但是函数不能被正确处理
+
+13.Object.assign
+Object.assign是ES6新添加的接口，主要的用途是用来合并多个JavaScript的对象。
+assign不会合并不可枚举的属性”
+浅拷贝 const b = Object.assign({},b)
+用于：添加属性，添加方法，克隆对象，覆盖设定默认值
+
+14rem
+//发生大小时触发
+window.addEventListener('resize',setRem)
+//页面加载完成
+window.addEventListener('load',setRem)
+// 屏幕旋转是触发
+window.addEventListener('onorientationchange',setRem)
+
+function setRem(){
+	let html = document.getElementsByTagName('html')[0];
+	let pageWidth = html.getBoundingClientRect().width;
+	html.style.fontSize = pageWidth / 16 + 'px'; 
+}
+@rem:46.875rem;
+img{
+	width: 750/@rem;
+}
+//
+@function rem($px){
+    //  根据 element 除出来的宽度计算
+    @return $px / 46.875 +rem;
+}
+img{
+	width:rem(100px)
+}
+
+15.fetch的好处
+response是一个综合方法的对象//未处理的方法集合，而不是请求的参数，根据想要的数据类型，response.json(),response.text(),response.blob()
+而且这些函数是一个promise，想要后台的数据需要.then才可以
+fetch(url).then(response => response.json())
+  .then(data => console.log(data))
+  .catch(e => console.log("Oops, error", e))
+
+
+16.a标签的target='_blank'
+<a href="https://niteshsoni.info" rel="noopener"></a>
+新页面可以通过window.opener控制原始页面，如果是同域，新页面可以操作原始页面，不同域也可以通过window.opener.location访问原始页面的location
+
+17.
