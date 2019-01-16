@@ -141,22 +141,81 @@ flex-wrap
 flex-flow:row nowarp;横列不换行
 justify-content:flex-start/flex-end/center/space-between/space-arpuond
 
-19.
+19.link与@import
+
+20::selection
+使被选中的文本成为红色，只能修改颜色，不能修改字体大小
+::selection
+{
+color:#ff0000;
+}
+
+21.初始化css样式
+浏览器兼容问题，不同浏览器对标签默认值不同，会导致浏览器之间的差异
+初始化会影响seo
+   淘宝的样式初始化： 
+    body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+    body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+    h1, h2, h3, h4, h5, h6{ font-size:100%; }
+    address, cite, dfn, em, var { font-style:normal; }
+    code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+    small{ font-size:12px; }
+    ul, ol { list-style:none; }
+    a { text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    sup { vertical-align:text-top; }
+    sub{ vertical-align:text-bottom; }
+    legend { color:#000; }
+    fieldset, img { border:0; }
+    button, input, select, textarea { font-size:100%; }
+    table { border-collapse:collapse; border-spacing:0; } 
+
+22.css sprites雪碧图
+将网页中的背景图片都集合到一张图上，只请求一次，减少图片请求的开销，
+利用css的background-position,background-repeat,background-image进行定位
+
+23.BFC  block formatting context 块级格式化上下文
+创建了新的BFC的盒子是独立布局的，盒子里面的子元素的样式不会影响到外面的元素。
+在同一个BFC中的两个毗邻的块级盒在垂直方向（和布局方向有关系）的margin会发生折叠。
+
+float不为none
+overflow不为visible
+position不是static和relative
+display的值是inline-block、table-cell、flex、table-caption或者inline-flex
+
+利用BFC避免外边距折叠，同一个bfc中的外边距是折叠的，所以创建多个bfc就可以避免折叠
+<div class="container">
+    <p>Sibling 1</p>
+    <p>Sibling 2</p>
+    <div class="newBFC">
+        <p>Sibling 3</p>
+    </div>
+</div>
+.container {
+    background-color: red;
+    overflow: hidden; /* creates a block formatting context */
+}
+p {
+    margin: 10px 0;
+    background-color: lightgreen;
+}
+.newBFC {
+    overflow: hidden;  /* creates new block formatting context */
+}
+
+设置overflow为hidden包含浮动
+一般设置浮动或postion为absolute的值会是去文档溜，容器的高度无法撑开，设置bfc后会撑开
+
+使用BFC避免文字环绕
+
+
+
+
+24.
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-20
+25.
