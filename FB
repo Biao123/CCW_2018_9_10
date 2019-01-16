@@ -108,4 +108,24 @@ fetch(url).then(response => response.json())
 <a href="https://niteshsoni.info" rel="noopener"></a>
 新页面可以通过window.opener控制原始页面，如果是同域，新页面可以操作原始页面，不同域也可以通过window.opener.location访问原始页面的location
 
-17.
+17.Promise
+好处
+Promise最大的好处是在异步执行的流程中，把执行代码和处理结果的代码清晰地分离了
+将异步操作以同步操作的流程展现出来，避免层层嵌套的回调函数，
+Promise对象提供统一的接口控制异步更加容易
+是一个构造函数本身拥有all,reject,resolve方法，原型上拥有then，catch方法
+坏处
+一旦新建就无法取消Promise，如果不设置回调函数，Promise内部抛出的错误就不会反应到外面，当处于pending的时候，不知道进展到哪个程度
+function run async(){
+	let p = new Promise((resolve,reject) => {
+		setTimeout(() => {
+			console.log('ok')
+			resolve('done')
+		},2000)
+	}).then((result) => {
+		console.log('result')
+	}).catch((reson) => {
+		console.log(reson)
+	})
+	return p
+}
