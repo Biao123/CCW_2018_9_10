@@ -1,0 +1,77 @@
+1语义化
+样式未加载的时候能显示清晰的数据结构
+方便其他设备解析渲染网页（屏幕阅读器，移动设备，盲人阅读器
+有利于seo，有助于爬虫抓取更多有效信息，爬虫依赖于标签来确定上下文和关键字的比重
+便于团队维护和开发，减少差异化
+
+2doctype
+（1） 。告知浏览器用何种标准渲染文档
+（2）、严格模式的排版和 JS 运作模式是  以该浏览器支持的最高标准运行。
+（3）、在混杂模式中，页面以宽松的向后兼容的方式显示。模拟老式浏览器的行为以防止站点无法工作。
+（4）、DOCTYPE不存在或格式不正确会导致文档以混杂模式呈现。   
+
+3.xhtml和html
+所有标记都需要一个相应的结束标记
+所有xml标记必须合理嵌套
+所有属性都需要“”覆盖
+标签和属性必须小写
+图片必须有说明文字
+
+4.兼容性
+浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一。
+Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示, 可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决.
+超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+
+5.消除浮动
+给包含浮动元素的父标签添加css属性 overflow:auto; zoom:1; zoom:1用于兼容IE6。
+在所有浮动标签后面添加一个空标签 定义css clear:both. 弊端就是增加了无意义标签。
+加上clearfix
+.clearfix:after{
+    content:".";
+    height:0;
+    visibility:hidden;
+    display:block;
+    clear:both;
+    }
+    
+6.H5
+语义化更好的标签，header,footer,aside,section
+音视频api，audio,video
+画布canvas
+地理geolocation
+本地缓存localstorage长期储存，浏览器关闭后不清除数据
+表单控件，calendar、date、time、email、url、search  
+v新的技术webworker, websocket, Geolocation
+
+移除
+对可用性产生负面影响的元素：frame，frameset，noframes；
+纯表现的元素：basefont，big，center，font, s，strike，tt，u
+
+区分
+DOCTYPE声明\新增的结构元素\功能元素
+
+7.解决fouc文档样式闪烁
+<head>之间加入一个<link>或者<script>元素就可以了
+
+8.new操作符
+创建一个空对象，并且this变量引用该对象，同时继承的原型
+属性和方法加入到this引用的对象
+新建的对象油this引用，并返回
+
+9.document.write重写整个页面
+innerHTML重绘页面的一部分
+
+10.eval
+将对应字符串解析成js代码运行
+先解析成js语句再执行，耗性能，不安全
+
+11.
+
+
+
+
+
+
+
+
+
