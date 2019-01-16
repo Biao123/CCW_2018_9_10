@@ -37,6 +37,27 @@
               this.instance = null;
           };
 
+4.
+js模块规范
+CommonJS,AMD,CMD
+https://www.cnblogs.com/chenguangliang/p/5856701.html
+
+require.js  依赖amd
+　　（1）实现js文件的异步加载，避免网页失去响应；
+
+　　（2）管理模块之间的依赖性，便于代码的编写和维护。
+
+<script src="js/require.js" defer async="true" ></script>
+<script src="js/require.js" data-main="js/main"></script>
+data-main属性的作用是，指定网页程序的主模块。在上例中，就是js目录下面的main.js，这个文件会第一个被require.js加载。
+由于require.js默认的文件后缀名是js，所以可以把main.js简写成main
+
+main.js
+require(['jquery', 'underscore', 'backbone'], function ($, _, Backbone){
+
+　　　　// some code here
+
+　　});
 
 
 
