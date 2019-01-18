@@ -4,4 +4,4 @@ import加载文件，代码转化
 开发生产俩配置职责分明，利于管理
 自动处理静态资源的优化，缓存，打包，压缩，减少加载时间，和http请求
 
-2.
+2.开发环境不能使用chunkhash，filename:'[name].js',不然会和webpack-dev-server报错
