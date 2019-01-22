@@ -61,3 +61,21 @@
 
 10  配置开发环境
     https://www.cnblogs.com/whkl-m/p/6627864.html
+    
+11. Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
+    Object.defineProperty(obj, prop, descriptor)
+    该方法允许精确添加或修改对象的属性。通过赋值操作添加的普通属性是可枚举的
+    默认都是false，undefined
+    get,set是是存取描述符，value，writable是数据描述符，俩者不可兼容， 
+    
+    convert()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
