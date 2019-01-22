@@ -1,0 +1,33 @@
+1.去除浏览器之间的默认背景样式
+input {
+    -webkit-appearance: none;
+}
+
+2.jQuery 使用.on()绑定动态生成的元素时，不能直接用该对象操作，而是选择其非动态生成的父节点然后再找到本身才能达到效果
+$("p").live("click", function(){
+    $(this).after("<p>Another paragraph!</p>");
+});
+$(document).on("click",'p', function(){
+    $(this).after("<p>Another paragraph!</p>");
+});
+
+3.禁止缩放
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+4.ios和安卓自动拨号
+<a href="tel:10010">10010</a>
+
+5.禁止复制选中
+Element {
+
+ -webkit-user-select: none;
+
+ -moz-user-select: none;
+
+ -khtml-user-select: none;
+
+  user-select: none;
+
+}
+
+6.
