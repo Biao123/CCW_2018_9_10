@@ -16,7 +16,7 @@
   3.ES6-extends类继承
     一个类只能有一个构造函数，默认是constructor
     
- 1.23---call,apply
+ 1.23---call,apply，改变this的指向
     区别是call接受的是若干个参数的列表
     apply接受的是多个对象的数组
     var func = function(arg1, arg2) {
