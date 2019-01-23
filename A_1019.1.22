@@ -54,6 +54,7 @@
             SuperType.call(this);
         }
       5.Array.prototype.push.apply(arr1,arr2);    //得到合并后数组的长度，因为push就是返回一个数组的长度
+      6.严格模式下use strict，this默认为undefined，普通模式下为window
 
   
 
