@@ -16,5 +16,44 @@
   3.ES6-extends类继承
     一个类只能有一个构造函数，默认是constructor
     
-  
+ 1.23---call,apply
+    区别是call接受的是若干个参数的列表
+    apply接受的是多个对象的数组
+    var func = function(arg1, arg2) {
+         ...
+    };
+    func.cal(this,arg1,arg2)
+    func.apply(this,[arg1,arg2])
     
+    1数组合并,Array.prototype.push.apply(arr1,arr2) //将第二个数组添加到第一个，当添加数组过多时会异常或丢失
+    2数组最大值最小值，Math.max.apply(Math,numbers),Math.max.call(Math,1,2,3),Math.max.call(Math,...numbers)
+    3Array.prototype.slice.call(domNodes),Array.from(),将类数组转换为数组
+      类数组：具有对象元素的数字索引下标和length属性，不能进行push，shift，indexOf，forEach等对象方法
+      兼容ie，ie9以下dom对象是以com对象实现的，js对象与com对象bb不能呼唤
+      function toArray(nodes){
+            try {
+                // works in every browser except IE
+                return Array.prototype.slice.call(nodes);
+            } catch(err) {
+                // Fails in IE < 9
+                var arr = [],
+                    length = nodes.length;
+                for(var i = 0; i < length; i++){
+                    // arr.push(nodes[i]); // 两种都可以
+                    arr[i] = nodes[i];
+                }
+                return arr;
+            }
+        }
+      4.调用父构造函数实现继承
+        function  SuperType(){
+            this.color=["red", "green", "blue"];
+        }
+        function  SubType(){
+            // 核心代码，继承自SuperType
+            SuperType.call(this);
+        }
+      5.Array.prototype.push.apply(arr1,arr2);    //得到合并后数组的长度，因为push就是返回一个数组的长度
+
+  
+
