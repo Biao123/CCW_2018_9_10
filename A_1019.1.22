@@ -104,9 +104,42 @@ history.pushState()  在history对象里加一个新的历史记录，压栈
 onhashchaneg()监听客户端前进后退事件，监听hash变化
 history.replaceState({page: 3}, "title 3", "?page=3"); //修改当前激活的历史记录条目 http://ex..?page=2 变为 http://ex..?page=3,条目索引为3
 
+前端路由
+hash就是url后#后的字母，与css的#一致
+window.location.hash = 'qq' // 设置 url 的 hash，会在当前url后加上 '#qq'
+var hash = window.location.hash // '#qq'  
+window.addEventListener('hashchange', function(){ 
+    // 监听hash变化，点击浏览器的前进后退会触发
+})
+
+1.23---浏览器渲染原理和流程
+浏览器渲染引擎主要是显示应用了css的html和图片
+解析html构建dom树，构建render树，布局render树，绘制render树
+浏览器就cssdom和dom合并生成render树
+reflow回流，浏览器发现某些部分发生了变化，需要倒回去重新渲染，主要是尺寸方面
+repaint重绘，改变某个元素的颜色文字颜色边框颜色等，屏幕的一部分要重绘，但尺寸不变
+(1)display:none 的节点不会被加入Render Tree，而visibility: hidden 则会，所以，如果某个节点最开始是不显示的，设为display:none是更优的。
+(2)display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint，因为没有发现位置变化。
+(3)有些情况下，比如修改了元素的样式，浏览器并不会立刻reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow，这又叫异步 reflow 或增量异步 reflow
+
+1.23---浏览器缓存
+浏览器把一个请求过的web资源拷贝一份存储在浏览器中，再次访问时如果相同的url，缓存会根据缓存机制是否适用副本响应请求
+减少网络带宽消耗
+减少网络延迟，加快页面打开速度
+减少请求降低服务器压力
+缓存规则：在http协议头和html的meta标签，通过新鲜度和校验值来判断
+新鲜度，过期机制：1.含有完整的过期时间控制信息头（http协议头）并在有效期内，2.浏览器已经使用过这个缓存副本，并且检查过新鲜度
+校验值，校验机制：服务起返回资源有时会在控制消息头上添加etag，entity tag，通过比较是否变化
+
+<meta http-equiv="Pragma" content="no-cache">  
 
 
 
+
+
+
+
+	
 
 
 
