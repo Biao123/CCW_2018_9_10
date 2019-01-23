@@ -94,9 +94,15 @@ $(...).事件名(function(e){})
 heap（堆）是用户主动请求而划分出来的内存区域，比如你new Object()，就是将一个对象存入堆中，可以理解为heap存对象。
 stack（栈）是由于函数运行而临时占用的内存区域，函数都存放在栈里。
 	
-	
-	
-
+1.23---history对象
+window.history.back()
+window.history.go()
+window.history.forward()
+这三者会触动h5的history.popState()
+history.replaceState() 替换history对象里当前的历史对象
+history.pushState()  在history对象里加一个新的历史记录，压栈
+onhashchaneg()监听客户端前进后退事件，监听hash变化
+history.replaceState({page: 3}, "title 3", "?page=3"); //修改当前激活的历史记录条目 http://ex..?page=2 变为 http://ex..?page=3,条目索引为3
 
 
 
