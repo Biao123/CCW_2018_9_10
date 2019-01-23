@@ -56,5 +56,19 @@
       5.Array.prototype.push.apply(arr1,arr2);    //得到合并后数组的长度，因为push就是返回一个数组的长度
       6.严格模式下use strict，this默认为undefined，普通模式下为window
 
-  
+ 1.23---js事件委托和代理
+        事件委托就是利用事件冒泡，只指定一个事件处理程序，添加到页面的事件处理程序会影响整体运行性能，与dom节点交互会导致浏览器的重绘和重排
+        event对象有一个target对象，可以返回事件的目标节点，成为事件源，标准浏览器为ev.target，ie为event.srcElement，获取当前节点nodeName然后toLowerCase
+        window.onload = function(){
+		    　　var oUl = document.getElementById("ul1");
+		    　　oUl.onclick = function(ev){
+		    	　　　　var ev = ev || window.event;
+		   		　　　　var target = ev.target || ev.srcElement;
+		        　　　　if(target.nodeName.toLowerCase() == 'li'){
+		        　 　　　　　　	alert(123);
+		　　　　　　　  alert(target.innerHTML);
+                }
+              }
+        }
+        
 
