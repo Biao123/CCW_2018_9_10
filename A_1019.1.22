@@ -72,7 +72,17 @@
         }
         
 
-1.23---bind,live,on
+1.23---bind,live，delegate,on 前俩者jq1.7/1.9就不用了
+单事件 $("").bind("click",data,function);
+多事件$("").bind("click dbclick mouseout",data,function);$("").bind({event1:function, event2:function, ...})
+bind绑定当前元素，重复注册
+live绑定document跟元素注册一次，但层级太深会影响性能
+delegate类型live但是绑定指定元素，注册一次，附加操作前期完成会造成页面加载时性能问题，bind方法不能直接升级到delegate
+on使各种事件绑定一致，支持bind方法，
+$(...).事件名(function(e){})
+
+
+
 	
 	
 	
