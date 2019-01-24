@@ -133,7 +133,16 @@ repaint重绘，改变某个元素的颜色文字颜色边框颜色等，屏幕�
 
 <meta http-equiv="Pragma" content="no-cache">  
 
+1.24---http
+http请求
+状态行：请求方式，地址，协议版本version
+请求头：cookie，访问的域名，用户代理
+请求正文：http请求的数据
 
+http响应
+状态行：状态码，协议版本，回应短语response phrase
+响应头：搭建服务器的软件，发送的时间，回应数据的格式
+响应正文：响应的具体数据
 
 
 
