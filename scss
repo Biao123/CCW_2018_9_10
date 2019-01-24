@@ -191,3 +191,20 @@ background-image: url("@{base_url}/images/background.png");
 
 17输出格式
 LESS并没有输出设置，而Sass提供4中输出选项：nested, compact, compressed 和 expanded。
+
+18
+    @mixin colorBtn($color, $hover) {
+        color: #fff;
+        background: $color;
+        &:hover {
+            background: $hover;
+            color: #fff;
+            &:before,
+            &:after {
+                background: $color;
+            }
+        }
+    }
+    .blue-btn {
+        //@include colorBtn($blue)
+    }
