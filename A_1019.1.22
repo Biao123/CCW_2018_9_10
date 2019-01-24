@@ -153,6 +153,9 @@ http响应
 复用多线程i/o
 
 1.24---TCP/IP/UDP
+网络层：ip协议，icmp，arp，bootp
+传输层：tcp，udp
+引用层：dns，snmp，tdtp，ftp，http
 application>tcp>ip>ethernet
 ethernet以太网规定电子信号如何组成数据包packet，解决子网内部点对点的通信
 IP：连接多个局域网的连接通信，实现路由功能，ip协议只是个地址协议不能保证传输包的不丢失，在缓存满的时候可能会丢包
