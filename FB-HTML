@@ -116,10 +116,53 @@ https://blog.csdn.net/gujinapenggu5/article/details/58006684
     docEl.firstElementChild.appendChild(fontEl);
     fontEl.innerHTML = 'html{font-size:' + rem + 'px!important;}'; 
 
+13.去除所有空格: str = str.replace(/\s*/g,"");      
+str.trimLeft()，str.trimRight()，$.trim(str)局限性：无法去除中间的空格
 
+14.typeof(obj) === "string"
+typeof obj === "string"
+obj.constructor === String
 
+15.获取url参数
+http://www.runoob.com/jquery/misc-trim.html?channelid=12333&name=xiaoming&age=23
+function showWindowHref(){
+    var sHref = window.location.href;
+    var args = sHref.split('?');
+    if(args[0] == sHref){
+        return "";
+    }
+    var arr = args[1].split('&');
+    var obj = {};
+    for(var i = 0;i< arr.length;i++){
+        var arg = arr[i].split('=');
+        obj[arg[0]] = arg[1];
+    }
+    return obj;
+}
+var href = showWindowHref(); // obj
+console.log(href['name']); // xiaoming
 
+16.this的使用
+构造函数
+function Animal(name, color) {
+　　this.name = name;
+　　this.color = color;
+}
+input取值
+    var btn = document.getElementById("text");
+    btn.onclick = function() {
+        alert(this.value);    //此处的this是按钮元素
+    }
+html属性使用，<input type=”button” onclick=”showInfo(this);” value=”点击一下”/>
+call/apply求值
+var  numbers = [5, 458 , 120 , -215 ]; 
+var  maxInNumbers = Math.max.apply(this, numbers);  
+console.log(maxInNumbers);  // 458
+var maxInNumbers = Math.max.call(this,5, 458 , 120 , -215); 
+console.log(maxInNumbers);  // 458
 
-
+17.
+ Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。
+typeof结果：undefined,boolean.string.function,number,object
 
 
