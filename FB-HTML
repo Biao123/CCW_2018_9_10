@@ -165,4 +165,56 @@ console.log(maxInNumbers);  // 458
  Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。
 typeof结果：undefined,boolean.string.function,number,object
 
+18.
+Web攻击技术
+
+
+19.
+正则
+
+20.
+document.ready:在文档加载完毕后触发事件
+document.onload:在图片等资源加载后执行事件
+
+21.cookie
+
+22.js计算
+
+23.
+src是请求外部资源的位置，指向的内容会潜入到标签所在的文档，
+href是请求网络资源的位置
+都会先下载资源再进行下一步
+
+24.jq浏览器禁止前进后退
+jQuery(document).ready(function () {
+                  if (window.history && window.history.pushState) {
+                      $(window).on('popstate', function () {
+　　　　　　　　　　　　　　　　/// 当点击浏览器的 后退和前进按钮 时才会被触发， 
+                          window.history.pushState('forward', null, ''); 
+                          window.history.forward(1);
+                      });
+                  }
+　　　　　　　　　　//
+                  window.history.pushState('forward', null, '');  //在IE中必须得有这两行
+                  window.history.forward(1);
+              });
+
+25.delegate（）
+给父元素下的子元素添加事件
+$("ul").delegate("li", "click", function(){ $(this).hide(); });
+
+26.移除标签事件
+获得a标签的onclick属性: $("a").attr("onclick")
+
+删除onclick属性：$("a").removeAttr("onclick");
+
+设置onclick属性：$("a").attr("onclick","test();");
+
+27.跨域，垃圾回收
+
+
+
+
+
+
 
