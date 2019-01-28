@@ -212,7 +212,14 @@ $("ul").delegate("li", "click", function(){ $(this).hide(); });
 
 27.跨域，垃圾回收
 
-
+28.三角形
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid blue;
+    background: white;
 
 
 
