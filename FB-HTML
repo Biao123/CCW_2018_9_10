@@ -68,6 +68,13 @@ innerHTML重绘页面的一部分
 11.
 https://blog.csdn.net/gujinapenggu5/article/details/58006684
 
+12.css实现居中
+    position，负边距，table-cell
+    1.display:flex;align-items:center;justify-content:center;
+    2.display:table-cell;text-align:center;vertival-align:middle;
+    3.绝对定位和负边距，postion:absolutely;left:50%;top:50%;
+    4.
+
 
 
 
