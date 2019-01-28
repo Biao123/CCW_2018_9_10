@@ -6,3 +6,35 @@ import加载文件，代码转化
 自动处理静态资源的优化，缓存，打包，压缩，减少加载时间，和http请求
 
 2.开发环境不能使用chunkhash，filename:'[name].js',不然会和webpack-dev-server报错
+
+3.vue优化
+运行时优化
+  使用v-if代替v-show，v-if不渲染dom，打个需要预渲染或者频繁切换状态使用v-show
+  v-for带上key值，切v-for不要和v-if一起用
+  事件及时销毁，除了组件本身会在销毁的时候清理它与它实例的连接，解绑指令和方法，其他js手动加的要手动销毁
+    created() {
+      addEventListener('touchmove', this.touchmove, false)
+    },
+    beforeDestroy() {
+      removeEventListener('touchmove', this.touchmove, false)
+    }
+    
+首屏优化
+   图片剪裁使用webp，如果使用v-lazyload，https://www.cnblogs.com/xyyt/p/7650539.html
+   v-lazy:background-image="{src: item.src, error: 'http://xx.com/error.png', loading: 'http://xx.com/loading-spin.svg'}"
+   Vue.use(VueLazyload, {
+      error: require('./assets/img/defaultpic_small.png'),
+      filter: {
+        webp (listener: any, options: any) {
+          if (!options.supportWebp) return
+          // listener.src += '.webp'
+        }
+      }
+    });
+   资源提前请求，Vue项目中各文件的加载顺序为：router.js、main.js、App.vue、[page].vue、[component].vue，
+   异步路由，根据url自动加载页面所需要的资源，比较适用与移动端，
+      {
+        path: '/order',
+        component: () => import('./views/order.vue')
+      }
+   
