@@ -221,6 +221,31 @@ $("ul").delegate("li", "click", function(){ $(this).hide(); });
     border-bottom: 50px solid blue;
     background: white;
 
+29.link @import
+link是页面载入时同时加载，后者是在页面加载完毕后加载
+link是xhtml标签可以加载除了css资源外，后者只能加载css
+link无兼容问题，后者支持css2.1后的
+link支持js改变dom
+
+30.js数组去重
+var b = [... new Set(arr)]
+[... new Set([arr1,arr2])].sort(a,b) =>{return a-b}
+
+
+31.navigator
+appName
+appVersion
+appCodeName
+cpuName
+cookieEnable
+systemLanguage
+
+
+
+
+
+
+
 
 
 
