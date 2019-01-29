@@ -247,6 +247,73 @@ cookie数据始终在同源的http请求中携带，在浏览器和服务端之�
 el.style.cssText += 'border-left: 1px; border-right: 2px; padding: 5px;';
 修改CSS的class，el.className += ' active';
 
+34. 对象的属性
+对象的属性：数据属性和访问器属性，是否能通过for-in循环返回属性可枚举性
+根据上下文环境又可分为原型属性和实例属性
+// 使用for..in
+for (var i in arr) {
+  console.log('索引：' + i + '，值：' + arr[i]);
+}
+// 使用for循环
+for (var j = 0; j < arr.length; j++) {
+  console.log('索引：' + j + '，值：' + arr[j]);
+}
+* 索引：0，值：a
+propertyIsEnumberable()和Object.getOwnPropertyDescriptor()
+var colors = ['red', 'green', 'blue'];
+// 扩展Array.prototype
+Array.prototype.demo = function () {};
+
+for (var i in colors) {
+  console.log(i); // 输出: 0 1 2 demo
+}
+
+// 查看原生的方法[[enumberable]]特征，这里以splice为例
+Array.prototype.propertyIsEnumerable('splice'); // false
+Object.getOwnPropertyDescriptor(Array.prototype, 'splice'); // {writable: true, enumerable: false, configurable: true}
+
+// 查看 demo 属性的特性
+Array.prototype.propertyIsEnumerable('demo'); // true
+Object.getOwnPropertyDescriptor(Array.prototype, 'demo'); // {writable: true, enumerable: true, configurable: true}
+
+可以用defineProperty过滤属性
+var colors = ['red', 'green', 'blue'];
+Object.defineProperty(Array.prototype, 'demo', {
+  enumerable: false,
+  value: function() {}
+});
+一、1、for in循环。遍历实例+原型中可枚举的属性
+2、for in不适合遍历数组
+3、扩展Array原型自己添加的属性和原生属性的区别（是否可枚举）
+4、propertyIsEnumberable()和Object.getOwnPropertyDescriptor()这两个方法
+5、Object.defineProperty定义属性的方法：
+Object.defineProperty(Array.prototype,"demo",{
+enumerable:false,
+value:function(){}
+})
+6、安全使用hasOwnProperty方法
+7、for in遍历数组的下标类型不一样 ：for in为String，for为Number
+8、对不存在项的处理：for in不存在的项不被枚举出来；for全部枚举出
+9、index in array特性可以判断某个索引是否存在对应元素
+10、遍历对象可通过hasOwnProperty()过滤掉原型里面的属性
+二、Object.keys()，遍历实例可枚举属性，返回属性名组成的数组。
+三、Object.getOwnPropertyNames()，遍历实例属性（包括不可枚举），返回属性名组成的数组
+四、for of输出数组中包括不存在的值在内的所有值
+
+35.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
