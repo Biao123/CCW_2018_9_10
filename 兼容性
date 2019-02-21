@@ -81,7 +81,19 @@ Element {
 	9:ie6背景闪烁问题：因为ie6的背景图片没有缓存，所以js缓存：document.execCommand("BackgroundImageCache",false,true);
 	10.
 
-3.
+3.图片加载优化
+	减少图片文件体积：压缩图片大小，采用合适的图片格式
+	减少图片资源http请求（合并）：合成雪碧图
+
+	预加载：按是否有进度条分为显性预加载和阴性预加载
+		显性：js设置页面dom结构放在js模板中，加载后，页面渲染给用户，页面创建一个image，设置src为预加载图片
+		隐性：先预加载部分图片首屏呈现给用户，然后继续加载图片不显示，如果触发页面图片还未加载，显示进度条
+	懒加载：延迟加载，按需加载
+		设置src为空'',真实src放在data-url='///'
+		监听屏幕滚动，计算图片y坐标，计算可视区域高度，y <= height+scrollTop时src替换实现懒加载（scrolltop是可滚动区域滚动的距离）
+		屏幕可视区域高度：window.innerHeight 标准浏览器及IE9+ || document.documentElement.clientHeight 标准浏览器及低版本IE标准模式 ||document.body.clientHeight 低版本混杂模式
+		浏览器底部与文档底部高度，滚动条距离：window.pagYoffset——IE9+及标准浏览器 || document.documentElement.scrollTop 兼容ie低版本的标准模式 ||document.body.scrollTop 兼容混杂模式
+
 
 
 
