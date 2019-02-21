@@ -30,4 +30,58 @@ Element {
 
 }
 
-6.
+1.浏览器加载优化
+	减少http请求
+	图片可以是图片地图或雪碧图sprites
+	样式放在头部
+	脚本放在底部
+	使用外部的js和css文件
+	压缩css/js
+	避免重定向（当页面发生了重定向就会延迟整个html文档的传输，在html文档到达之前页面会空白）
+	删除重复脚本冗余代码
+	ajax可缓存，get请求是可以在客户端缓存的，提高请求速度，post不能缓存，每次都要发送到服务器进行处理数据
+	避免css表达式，可使用js事件或者一次性表达式
+		p {
+		    width: expression(func(),document.body.clientWidth > 400 ? "400px" : "auto");
+		    height: 80px;
+		    border: 1px solid #f00;
+		}
+		p {
+		    width: expression(func(this));
+		    height: 80px;
+		    border: 1px solid #f00;
+		}
+		    var n = 0;
+		    function func(elem) {
+		        n++;
+		        elem.style.width = document.body.clientWidth > 400 ? '400px' : "auto";
+		        console.log(n);
+		    }
+
+
+2.浏览器兼容
+	css hack
+	!important : 7以上
+	_ : ie6
+	*+ ： ie7
+	\0 : ie8
+	\9 : ie9之前的都能用
+	* : 6,7
+
+
+
+	1.引入css reset初始化消除浏览器默认标签，margin:0;padding:0
+	2.float和margin都有的时候ie6的margin会变大导致最后一块顶到下一行：设置加上float和display:inline
+	3.图片即使消除了默认边距海曙会有默认边距：设置img的float属性
+	4.min-height不兼容：设置min-height:100px;height:auto !important;height:100px;overflow:visible;
+	5.超链接点击后样式不出现，l-v-h-a
+	6.head标签中加入meta 类型<meta http-equiv="X-UA-Compatible"content="IE=EmulateIE7" />解决ie7，8问题
+	7.cursor:hand;safari，ff不支持,cursor:pointer
+	8.ie6,7中img和文字一起的时候line-height不起作用：都加上float
+	9:ie6背景闪烁问题：因为ie6的背景图片没有缓存，所以js缓存：document.execCommand("BackgroundImageCache",false,true);
+	10.
+
+3.
+
+
+
