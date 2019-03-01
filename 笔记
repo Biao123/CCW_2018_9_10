@@ -15,4 +15,6 @@
     },
 
 2上线版本的刷新问题
-    JS版本时间戳加上更新时间，或者强制刷新（不能让用户这样
+    JS版本时间戳加上更新时间,这样url地址每次变化，浏览器就会请求服务端的js，而不会使用缓存
+         <script type="text/javascript" src="{{passport_host}}js/common.js?t=20150622" ></script>
+        但是会导致浏览器每次都要去请求服务端的js文件。占用带宽
