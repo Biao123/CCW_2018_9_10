@@ -13,3 +13,6 @@
       //   this.content = m
       //   this.questionAnswerDTOs.question.questionContent = m
     },
+
+2上线版本的刷新问题
+    JS版本时间戳加上更新时间，或者强制刷新（不能让用户这样
