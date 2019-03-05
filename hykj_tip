@@ -1,0 +1,1 @@
+1.在forEach中，不能使用 continue 和 break ，可以使用 return 或 return false 跳出循环，效果与 for 中 continue 一样。注意该方法无法一次结束所有循环，需要一次性结束所有循环，还是老老实实使用for方法。
