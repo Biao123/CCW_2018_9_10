@@ -1,6 +1,8 @@
 1.在forEach中，不能使用 continue 和 break ，可以使用 return 或 return false 跳出循环，效果与 for 中 continue 一样。注意该方法无法一次结束所有循环，需要一次性结束所有循环，还是老老实实使用for方法。
 
 2.jq validate 数组验证 https://blog.csdn.net/nicexibeidage/article/details/83142559
+:id='`id ${index}`'
+name=''
 $(function() {
     if ($.validator) {
         //fix: when several input elements shares the same name, but has different id-ies....
@@ -20,6 +22,16 @@ $(function() {
         };
     }
 });
+
+5坑：v-model的id值不能为null，
+	<select v-model="park.areaId" class="form-control" name="regionId" @change='getParkList'>
+		<option value="" disabled>请选择区域...</option>
+		<option v-for="option in areaList" :value="option.id">
+			{{ option.areaName }}
+		</option>
+	</select>
+
+
 
 3.储存cookie
 		$(function (){
