@@ -58,4 +58,336 @@ $(function() {
 		    "" == vm.car.strArriveTime ? (alert("请输入入场时间"), $("#download").removeAttr("href")) : ($("#download").attr("href", baseURL + "vehicleentrydetails/zombieDownload?strArriveTime=" + vm.car.strArriveTime), $("#download").attr("download", "无进场信息车辆表"))
 		}
 
-5.
+5.导入excel,layer.js
+@click="upload"
+<a class="btn btn-primary" style="position:relative;">
+	选择excel文件
+	<input type="file" id="uploadForm" name="file" style="width: 90px;height:34px;position: absolute; left: 0;top: 0;opacity: 0; filter:alpha(opacity=0);z-index:99;" accept=".xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+</a>
+upload: function() {
+            layer.open({
+                type: 1,
+                title: "选择excel文件",
+                skin: "layui-layer-rim",
+                area: ["420px", "240px"],
+                content: $(".tankuan"),
+                btn: ["确定", "取消"],
+                yes: function() {
+                    var e = document.getElementById("uploadForm"),
+                    a = new FormData;
+                    a.append("file", e.files[0]),
+                    $.ajax({
+                        type: "POST",
+                        url: baseURL + "vehicleclassdetails/authorizes/excelCheck",
+                        async: !0,
+                        data: a,
+                        processData: !1,
+                        contentType: !1,
+                        success: function(e) {
+                            0 == e.code ? "true" == e.error_msg ? (layer.closeAll(), layer.load(1, {
+                                shade: [.5, "#fff"],
+                                content: "数据导入中...",
+                                success: function(e) {
+                                    e.css("padding-left", "30px"),
+                                    e.find(".layui-layer-content").css({
+                                        "padding-top": "40px",
+                                        width: "90px",
+                                        "background-position-x": "16px",
+                                        color: "red"
+                                    })
+                                }
+                            }), $.ajax({
+                                url: baseURL + "vehicleclassdetails/authorizes/Inside/import",
+                                type: "POST",
+                                cache: !1,
+                                async: !0,
+                                data: a,
+                                processData: !1,
+                                contentType: !1,
+                                success: function(e) {
+                                    if (0 == e.code) {
+                                        layer.closeAll();
+                                        var a = e.result,
+                                        t = JSON.parse(a);
+                                        vm.updateNum = t.updateNum,
+                                        vm.insertNum = t.insertNum,
+                                        $("#jqGridTwo").jqGrid({
+                                            datatype: "local",
+                                            data: t.errorList,
+                                            colModel: [{
+                                                label: "车牌号1",
+                                                name: "carNum1",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "车牌号2",
+                                                name: "carNum2",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "车牌号3",
+                                                name: "carNum3",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "车牌号4",
+                                                name: "carNum4",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "错误原因",
+                                                name: "memo",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "车类",
+                                                name: "vehicleClassName",
+                                                width: "90"
+                                            },
+                                            {
+                                                label: "车位数",
+                                                name: "lotCount",
+                                                width: "90"
+                                            },
+                                            {
+                                                label: "生效起始时间",
+                                                name: "startDatetime",
+                                                formatter: function(e, a, t, l) {
+                                                    return new Date(e).format("yyyy-MM-dd hh:mm:ss")
+                                                },
+                                                width: "140"
+                                            },
+                                            {
+                                                label: "生效结束时间",
+                                                name: "endDatetime",
+                                                formatter: function(e, a, t, l) {
+                                                    return new Date(e).format("yyyy-MM-dd hh:mm:ss")
+                                                },
+                                                width: "140"
+                                            },
+                                            {
+                                                label: "延迟缴费天数",
+                                                name: "delayDays",
+                                                width: "140"
+                                            },
+                                            {
+                                                label: "车主姓名",
+                                                name: "clientName",
+                                                width: "120"
+                                            },
+                                            {
+                                                label: "车主电话",
+                                                name: "clientTelephone",
+                                                width: "120"
+                                            },
+                                            {
+                                                label: "储值金额",
+                                                name: "rechargeMoney",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "公司名称",
+                                                name: "companyName",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "部门名称",
+                                                name: "departmentName",
+                                                width: "110"
+                                            },
+                                            {
+                                                label: "停车位",
+                                                name: "parkingSpace",
+                                                width: "90"
+                                            }],
+                                            viewrecords: !0,
+                                            height: 485,
+                                            rowNum: 8e3,
+                                            autowidth: !0
+                                        }),
+                                        $("#jqGridTwo").jqGrid("clearGridData"),
+                                        $("#jqGridTwo").jqGrid("setGridParam", {
+                                            data: t.errorList
+                                        }).trigger("reloadGrid"),
+                                        layer.open({
+                                            type: 1,
+                                            title: "导入详情：&nbsp;新增&nbsp;" + vm.insertNum + "&nbsp;条，更新&nbsp;" + vm.updateNum + "&nbsp;条",
+                                            area: ["100%", "100%"],
+                                            content: $(".import"),
+                                            btn: ["确定", "取消"],
+                                            yes: function() {
+                                                layer.closeAll(),
+                                                vm.reload()
+                                            },
+                                            btn2: function() {
+                                                vm.reload()
+                                            }
+                                        })
+                                    } else layer.closeAll(),
+                                    alert("excel导入失败")
+                                }
+                            })) : "false" == e.error_msg && (layer.closeAll(), layer.open({
+                                type: 1,
+                                title: "请授权停车场",
+                                skin: "layui-layer-rim",
+                                area: ["420px", "340px"],
+                                content: $(".tankuanPark"),
+                                btn: ["确定", "取消"],
+                                yes: function() {
+                                    a.append("parkIds", vm.carDetails.parkIds),
+                                    layer.closeAll(),
+                                    layer.load(1, {
+                                        shade: [.5, "#fff"],
+                                        content: "数据导入中...",
+                                        success: function(e) {
+                                            e.css("padding-left", "30px"),
+                                            e.find(".layui-layer-content").css({
+                                                "padding-top": "40px",
+                                                width: "90px",
+                                                "background-position-x": "16px",
+                                                color: "red"
+                                            })
+                                        }
+                                    }),
+                                    $.ajax({
+                                        type: "POST",
+                                        url: baseURL + "vehicleclassdetails/authorizes/External/import",
+                                        async: !0,
+                                        cache: !1,
+                                        data: a,
+                                        processData: !1,
+                                        contentType: !1,
+                                        success: function(e) {
+                                            if (0 == e.code) {
+                                                layer.closeAll();
+                                                var a = e.result,
+                                                t = JSON.parse(a);
+                                                vm.updateNum = t.updateNum,
+                                                vm.insertNum = t.insertNum,
+                                                $("#jqGridTwo").jqGrid({
+                                                    datatype: "local",
+                                                    data: t.errorList,
+                                                    colModel: [{
+                                                        label: "车牌号1",
+                                                        name: "carNum1",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "车牌号2",
+                                                        name: "carNum2",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "车牌号3",
+                                                        name: "carNum3",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "车牌号4",
+                                                        name: "carNum4",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "错误原因",
+                                                        name: "memo",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "车类",
+                                                        name: "vehicleClassName",
+                                                        width: "90"
+                                                    },
+                                                    {
+                                                        label: "车位数",
+                                                        name: "lotCount",
+                                                        width: "90"
+                                                    },
+                                                    {
+                                                        label: "生效起始时间",
+                                                        name: "startDatetime",
+                                                        formatter: function(e, a, t, l) {
+                                                            return new Date(e).format("yyyy-MM-dd hh:mm:ss")
+                                                        },
+                                                        width: "140"
+                                                    },
+                                                    {
+                                                        label: "生效结束时间",
+                                                        name: "endDatetime",
+                                                        formatter: function(e, a, t, l) {
+                                                            return new Date(e).format("yyyy-MM-dd hh:mm:ss")
+                                                        },
+                                                        width: "140"
+                                                    },
+                                                    {
+                                                        label: "延迟缴费天数",
+                                                        name: "delayDays",
+                                                        width: "140"
+                                                    },
+                                                    {
+                                                        label: "车主姓名",
+                                                        name: "clientName",
+                                                        width: "120"
+                                                    },
+                                                    {
+                                                        label: "车主电话",
+                                                        name: "clientTelephone",
+                                                        width: "120"
+                                                    },
+                                                    {
+                                                        label: "储值金额",
+                                                        name: "rechargeMoney",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "公司名称",
+                                                        name: "companyName",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "部门名称",
+                                                        name: "departmentName",
+                                                        width: "110"
+                                                    },
+                                                    {
+                                                        label: "停车位",
+                                                        name: "parkingSpace",
+                                                        width: "90"
+                                                    }],
+                                                    viewrecords: !0,
+                                                    height: 485,
+                                                    rowNum: 8e3,
+                                                    autowidth: !0
+                                                }),
+                                                $("#jqGridTwo").jqGrid("clearGridData"),
+                                                $("#jqGridTwo").jqGrid("setGridParam", {
+                                                    data: t.errorList
+                                                }).trigger("reloadGrid"),
+                                                layer.open({
+                                                    type: 1,
+                                                    title: "导入详情：&nbsp;新增&nbsp;" + vm.insertNum + "&nbsp;条，更新&nbsp;" + vm.updateNum + "&nbsp;条",
+                                                    area: ["100%", "100%"],
+                                                    content: $(".import"),
+                                                    btn: ["确定", "取消"],
+                                                    yes: function() {
+                                                        layer.closeAll(),
+                                                        vm.reload()
+                                                    },
+                                                    btn2: function() {
+                                                        vm.reload()
+                                                    }
+                                                })
+                                            } else layer.closeAll(),
+                                            alert("excel导入失败")
+                                        }
+                                    })
+                                }
+                            })) : alert("excel文件不正确,请查看日期格式是否正确",
+                            function() {
+                                layer.closeAll(),
+                                vm.reloa()
+                            })
+                        }
+                    })
+                }
+            })
+        },
