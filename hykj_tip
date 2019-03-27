@@ -52,4 +52,10 @@ $(function() {
 			parent.location.href = 'index.html';
 		})
  
- 4.
+ 4.导出excel
+	 <a class="btn btn-primary" @click="download" id="download">导出记录</a>
+	 download: function() {
+		    "" == vm.car.strArriveTime ? (alert("请输入入场时间"), $("#download").removeAttr("href")) : ($("#download").attr("href", baseURL + "vehicleentrydetails/zombieDownload?strArriveTime=" + vm.car.strArriveTime), $("#download").attr("download", "无进场信息车辆表"))
+		}
+
+5.
