@@ -1,0 +1,8 @@
+安装sdk
+添加环境path
+下载android studio
+插件 flutter
+下载夜游模拟器
+夜游bin cmd nox_adb.exe connect 127.0.0.1:62001 连接到模拟器
+dart文件修改
+加载包，下载，引入，使用
