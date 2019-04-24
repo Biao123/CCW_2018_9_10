@@ -1,0 +1,83 @@
+刷新
+$("#deptTable").bootstrapTable('refresh');
+
+/**
+ * 初始化表格的列
+ */
+Dept.initColumn = function () {
+    var columns = [
+        {field: 'selectItem', radio: true},
+        {title: '部门ID', field: 'deptId', visible: false, align: 'center', valign: 'middle', width: '80px'},
+        {title: '部门名称', field: 'name', align: 'center', valign: 'middle', sortable: true, width: '180px'},
+        {title: '上级部门', field: 'parentName', align: 'center', valign: 'middle', sortable: true, width: '100px'},
+        {title: '排序号', field: 'orderNum', align: 'center', valign: 'middle', sortable: true, width: '100px'}]
+    return columns;
+};
+
+$.get(baseURL + "sys/dept/info", function(r){
+            vm.initialId = r.deptId
+            console.log(r)
+            $("#deptTable").bootstrapTable({
+                url: baseURL + "sys/dept/sub/" +r.deptId,
+                method: 'get',
+                detailView: true,//父子表
+                sortable:false,
+                idField:'deptId',
+                uniqueId:"deptId",
+                columns: Dept.initColumn(),
+                //注册加载子表的事件。注意下这里的三个参数！
+                onExpandRow: function (index, row, $detail) {
+                    InitSubTable(index, row, $detail);
+                    $detail.css("padding",'0 0 0 30px')
+                    vm.updateId = row.deptId
+                    console.log(row)
+                },
+                onCheck:function(row, $detail){
+                    vm.updateId = row.deptId
+                    console.log(row)
+                 },
+                onClickCell: function (field, value, row, $element) {
+                    vm.updateId = row.deptId
+                    console.log(row)
+                },
+            });
+            var InitSubTable = function (index, row, $detail) {
+                var parentid = row.deptId;
+                console.log(parentid)
+                var cid=row.id
+                 $.ajax({
+                 type:"get",
+                 url:baseURL + "sys/dept/sub/"+parentid,
+                 async:false,
+                 success:function(data){
+                    console.log(data)
+                    console.log($detail)
+                     if(data.length>0){
+                         var cur_table = $detail.html('<table class="childTable"></table>').find('table');
+                         console.log(cur_table)
+                         $(cur_table).bootstrapTable({
+                             url:baseURL + "sys/dept/sub/"+parentid,
+                             method:'get', 
+                             dataField:'deptList',                       
+                             clickToSelect:true,
+                             sortable:false,
+                             detailView: true,//父子表
+                             idField:'deptId',
+                             uniqueId:"deptId",
+                             columns: Dept.initColumn(),
+                             onCheck:function(row, $detail){
+                                vm.updateId = row.deptId
+                                console.log(row)
+                             },
+                             onExpandRow: function (index, row, $detail) {
+                                InitSubTable(index, row, $detail);
+                                $detail.css("padding",'0 0 0 30px')
+                                vm.updateId = row.deptId
+                                console.log(row)
+                            },
+                         });                        
+                        }
+                     }
+                 });
+            }
+        })
