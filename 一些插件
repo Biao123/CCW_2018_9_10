@@ -1,0 +1,8 @@
+图片模态框
+<link rel="stylesheet" href="../../plugins/blueimp/css/blueimp-gallery.min.css">
+<script src="../../plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+function enteredKbFmatter(picUrl){
+    return '<div class="lightBoxGallery"><a href="'+picUrl+
+    '" data-gallery=""><img src="'+picUrl+
+    '" width="80" height="50" onerror="this.src=\'../../swagger/images/imgError.png\'" ></a><div id="blueimp-gallery" class="blueimp-gallery"><div class="slides"></div><a class="prev">‹</a><a class="next">›</a><a class="close">×</a><a class="play-pause"></a><ol class="indicator"></ol></div></div>'    	
+  }
