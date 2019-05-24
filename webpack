@@ -43,3 +43,13 @@ module.exports = {
     inline: true //实时刷新
   }
 }
+
+
+
+
+重点
+1     插件clean-webpack-plugin 使用时不要带参数 
+      npm install --save-dev clean-webpack-plugin
+      const cleanWebpackPlugin = require('clean-webpack-plugin')
+      plugins:[new cleanWebpackPlugin()]
+
