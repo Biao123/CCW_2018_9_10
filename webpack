@@ -53,3 +53,12 @@ module.exports = {
       const cleanWebpackPlugin = require('clean-webpack-plugin')
       plugins:[new cleanWebpackPlugin()]
 
+2     webpack4 需要下载webpack-cli webpack
+
+3     
+      path.join('/a', '/b') // 'a/b'
+      path.resolve('/a', '/b') // '/b'
+      join类似于叠加，resolve类似cd取后面的
+      path.resolve总是返回一个以相对于当前的工作目录（working directory）的绝对路径。
+      path.join('./a', './b') // 'a/b'
+      path.resolve('./a', './b') // '/Users/username/Projects/webpack-demo/a/b'
