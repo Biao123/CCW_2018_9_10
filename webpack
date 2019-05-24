@@ -62,3 +62,7 @@ module.exports = {
       path.resolve总是返回一个以相对于当前的工作目录（working directory）的绝对路径。
       path.join('./a', './b') // 'a/b'
       path.resolve('./a', './b') // '/Users/username/Projects/webpack-demo/a/b'
+4 
+      babel-plugin-transform-runtime 去除冗余代码
+      "presets": ["env"]
+      env为自动匹配最新语法代替es2015
