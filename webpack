@@ -66,3 +66,7 @@ module.exports = {
       babel-plugin-transform-runtime 去除冗余代码
       "presets": ["env"]
       env为自动匹配最新语法代替es2015
+
+5     中文文档  http://webpack.html.cn/concepts/
+
+6
