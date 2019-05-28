@@ -69,4 +69,6 @@ module.exports = {
 
 5     中文文档  http://webpack.html.cn/concepts/
 
-6
+6     切记modules:{rules:[{test:/\.less$/,use:['style-loader,'css-loader','less-loader']}]}   test不要带引号
+
+7
